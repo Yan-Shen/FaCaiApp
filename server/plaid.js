@@ -4,17 +4,13 @@ const {Institution, Account, Transaction} = require('./db/models');
 
 var startDate = moment().subtract(30, 'days').format('YYYY-MM-DD');
 var endDate = moment().format('YYYY-MM-DD');
-// let PLAID_CLIENT_ID ='5a39e7cfefe64e7803074b58';
-// let PLAID_SECRET = '33148810212bdb98f09993a25f4457';
-// let PLAID_PUBLIC_KEY = 'f74fcf55c0b94e51b2e5a3912667b0';
-// const PLAID_ENV = 'development';
+
 
 const PLAID_CLIENT_ID='5a39e7cfefe64e7803074b58';
 const PLAID_SECRET='33148810212bdb98f09993a25f4457';
 const PLAID_PUBLIC_KEY='f74fcf55c0b94e51b2e5a3912667b0';
 const PLAID_ENV='sandbox';
-// const accessToken = 'access-development-9a9b74a2-e1c4-47f2-a1a5-4a1937fd98dc';
-// const ITEM_ID = 'yk1okzoNraU0jvey5woqIzRqEkzLxzHgqZjp9';
+
 
 const loadData = function (tokenArr) {
 
@@ -82,7 +78,6 @@ const loadData = function (tokenArr) {
               if (error != null) {
                 console.log(JSON.stringify(error));
               }
-              console.log('transactionsResponse are ---------------', transactionsResponse);
               transactionsResponse.transactions.map(transaction=>{
                     Transaction.findOrCreate({
                       where: {
