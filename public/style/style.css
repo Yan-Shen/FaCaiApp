@@ -1,0 +1,387 @@
+body {
+  font-family: sans-serif;
+  box-sizing: border-box;
+  margin: 0px;
+}
+
+a {
+  text-decoration: none;
+}
+
+label {
+  display: block;
+}
+
+nav a {
+  display: inline-block;
+  margin: 1em;
+}
+
+form div {
+  margin: 1em;
+  display: inline-block;
+}
+
+.flex-container-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.flex-container-row {
+  display: flex;
+  align-items: center;
+}
+
+.flex-container-wrap {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.flex-container-spaceBtw {
+  justify-content: space-between
+}
+
+.fullWidth {
+  width: 100%
+}
+
+#mainSection {
+  background-color: #e4dffd;
+  height: 100vh;
+}
+/*---------------------------- NAV SECTION ----------------------------*/
+#navContainer {
+  background-color: #937ff8;
+  padding-right: 120px;
+  padding-left: 120px;
+  color: white;
+  height: 60px;
+  box-sizing: border-box;
+}
+
+#navContainer h1{
+  font-weight: 400;
+  font-size: 1.7em;
+  letter-spacing: 2px;
+}
+
+#navContainer img {
+  width: 90px;
+  height: 50px;
+}
+
+#navContainer a{
+  color: white;
+  font-size: 1.1em;
+  letter-spacing: 1px;
+}
+
+/*---------------------------- PLAIDLINK ----------------------------*/
+#plaidContainer {
+  display: inline-block;
+  width: 100%;
+  margin-right: 12px;
+  border-bottom-color: #bdbccd;
+  border-bottom-style: solid;
+  border-bottom-width: thin;
+  padding-bottom: 15px;
+  text-align: center;
+}
+
+#plaidContainer button {
+  background: transparent;
+  font-size: 1.1em;
+  letter-spacing: 1px;
+  color: white;
+  border-radius: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-color: #bdbccd;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+/*---------------------------- LOGIN SECTION ----------------------------*/
+#loginContainer {
+  width: 80%;
+  height: calc(100vh - 210px);
+  justify-content: space-around;
+  background-color: white;
+  margin-top: 80px;
+  margin-bottom: 80px;
+  padding-top: 80px;
+  box-sizing: border-box;
+}
+
+#loginContainer>div{
+  margin-left: 90px;
+  margin-right: 90px;
+  justify-content: space-around;
+}
+#loginForm {
+  width: 35%;
+}
+
+#loginForm div {
+  width: 100%;
+}
+
+#loginForm input {
+  box-sizing: border-box;
+  width: 90%;
+  height: 40px;
+  font-size: 1.2em;
+  background-color: #e1dedf;
+  padding-left: 15px;
+  letter-spacing: 2px;
+  font-weight: 600;
+  color: #c1babc;
+  border-radius: 5px;
+  border-style: inset;
+}
+
+#loginForm >div {
+  margin-top: 30px;
+}
+
+#loginForm button {
+  width: 50%;
+  height: 40px;
+  font-size: 1.5em;
+  margin-left: 40%;
+  background-color: #7b2942;
+  color: white;
+  border-radius: 5px;
+  border-style: outset;
+}
+
+#orContainer {
+  width: 20%;
+  height: 300px;
+  padding-top: 108px;
+  box-sizing: border-box;
+}
+
+.back-line {
+  line-height: 0;
+  border-bottom: 1px dotted #999;
+  text-align: center;
+  width: 180px;
+}
+
+.back-line > span {
+  background: #fff;
+  color: #999;
+  padding: 0.5em;
+  border: 1px dotted #999;
+  border-radius: 50%; }
+
+  #googleBtnContainer {
+    height: 300px;
+    padding-top: 87px;
+    box-sizing: border-box;
+    margin-left: 20px;
+    width: 32%;
+  }
+
+  #googleBtn {
+    width: 100%;
+    height: 45px;
+    text-align: left;
+    padding-bottom: 5px;
+    justify-content: space-around;
+    background-color: #0d3cbf;
+    border-radius: 5px;
+    border-style: outset;
+  }
+
+  #googleBtn span {
+    font-size: 1.5em;
+    letter-spacing: 1px;
+    font-weight: 600;
+    color: white;
+  }
+
+  #googleBtn img {
+    width: 30px;
+    height: 30px;
+    padding-right: 5px;
+    padding-left: 10px;
+  }
+
+  /*---------------------------- BANKLIST SECTION ----------------------------*/
+
+  #bankListContainer {
+    min-width: 25%;
+    background-color: #2b0cc2;
+    display: inline-block;
+    min-height: 500px;
+    margin-top: 60px;
+    padding-top: 25px;
+    padding-left: 50px;
+    padding-right: 50px;
+    box-sizing: border-box;
+    /* box-shadow: 3px 3px 5px 6px #ccc; */
+
+    border-radius: 8px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    height: 536px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+    opacity: 1;
+    overflow: hidden;
+    position: relative;
+  }
+
+  #bankList {
+    min-height: 60%;
+    background-color: #f2f0fe;
+    border-radius: 5px;
+    border-style: inset;
+  }
+
+  #bankList div{
+    box-sizing: border-box;
+    width: 100%;
+    border-top-style: solid;
+    border-top-width: 0.1px;
+    border-top-color: #e5eafb;
+    text-align: left;
+    padding: 10px 10px;
+
+  }
+
+  #bankList span {
+    color: grey;
+    font-size: 1.2em;
+    letter-spacing: 1px;
+  }
+
+  /*---------------------------- HOME SECTION ----------------------------*/
+  #homeContainer {
+    width: 100%;
+    background-color: white;
+    height: calc(100vh - 60px);
+  }
+
+  #bankNavContainer{
+    width: 100%;
+    height: 80px;
+    background-color: white;
+    justify-content: space-around;
+    padding-right: 8%;
+    box-sizing: border-box;
+    padding-left: 8%;
+  }
+
+  #bankNavContainer span {
+    color: grey;
+  }
+
+  #edge{
+    background: #bcaffb;
+    width: 100%;
+    height: 20px;
+  }
+
+  #bankNavContainer div{
+    display: inline-block;
+
+  }
+  #dashboardContainer{
+    width: 100%;
+    height: 630px;
+    justify-content: space-between;
+  }
+
+  #dashboardContainer>div{
+    flex: 0 0 50%;
+
+  }
+
+  .halfSec {
+    height: 100%;
+    box-sizing: border-box;
+  }
+
+  #balance{
+    padding-left: 11%;
+  }
+
+  #balance h3, #exp h3{
+    flex: 0 0 5%;
+    margin-bottom: 0px;
+    color: grey;
+  }
+
+  #balance>div, #exp>div {
+    border-style: solid;
+    border-color: #e6ebea;
+    border-width: 0.3px;
+    width: 92%;
+    box-sizing:border-box;
+  }
+
+  #exp{
+    padding-right: 11%;
+  }
+
+/*---------------------------- SUMMARY ROW SECTION ----------------------------*/
+  .rowSec {
+    flex: 0 0 20%;
+    height: 100px;
+    margin-top: 5px;
+  }
+
+#topRow div {
+  flex: 0 0 33.33%;
+  height: 100%;
+  border: none;
+}
+ #topRow div:first-child{
+  border-right-style: solid;
+  border-right-color: #e6ebea;
+  border-right-width: 0.2px;
+ }
+
+ #sec2Container{
+  border-right-style: solid !important;
+  border-right-color: #e6ebea !important;
+  border-right-width: 0.2px !important;
+ }
+
+#netContainer, #assetContainer, #liabilityContainer {
+  border: none !important;
+  margin-bottom:10px;
+ }
+
+ #netContainer>span, #assetContainer>span, #liabilityContainer>span{
+  color:#5d3ff4;
+ }
+
+ #netContainer>span {
+  font-size: 1.3em;
+ }
+ #assetContainer>span, #liabilityContainer>span{
+  font-size: 0.9em;
+  color:#5d3ff4;
+ }
+
+.setPadding {
+padding-top:40px;
+padding-bottom:35px;
+box-sizing: border-box;
+}
+
+/*---------------------------- DETAIL ROW SECTION ----------------------------*/
+
+.detailItem{
+  flex: 0 0 33%;
+}
+/*---------------------------- CHART SECTION ----------------------------*/
+  .chartContainer {
+    flex: 0 0 40%;
+    margin-top: 10px;
+    height: 160px;
+  }

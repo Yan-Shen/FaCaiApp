@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import {withRouter, Link} from 'react-router-dom'
 import {logout} from '../store'
 
+
 /**
  * COMPONENT
  *  The Main component is our 'picture frame' - it displays the navbar and anything
@@ -12,27 +13,34 @@ import {logout} from '../store'
  */
 const Main = (props) => {
   const {children, handleClick, isLoggedIn} = props
-
   return (
-    <div>
-      <h1>BOILERMAKER</h1>
+    <div id="navContainer"className="flex-container-row flex-container-spaceBtw fullWidth">
+      <div className="flex-container-row">
+        <img src="../style/logo.png" />
+        <h1>FaCaiApp</h1>
+      </div>
       <nav>
+
         {
           isLoggedIn
             ? <div>
               {/* The navbar will show these links after you log in */}
-              <Link to="/home">Home</Link>
-              <a href="#" onClick={handleClick}>Logout</a>
+              {
+                (!props.location.pathname.includes('links')&&<Link to={`/links/${props.user.id}`}>link</Link>)}
+              {
+                props.location.pathname.includes('links') &&
+                <Link to={`/${props.user.id}`}>home</Link>
+              }
+              <a href="#" onClick={handleClick}>logout</a>
             </div>
             : <div>
               {/* The navbar will show these links before you log in */}
-              <Link to="/login">Login</Link>
-              <Link to="/signup">Sign Up</Link>
+
+              <Link to="/login">login</Link>
+              <Link to="/signup">signup</Link>
             </div>
         }
       </nav>
-      <hr />
-      {children}
     </div>
   )
 }
@@ -42,7 +50,8 @@ const Main = (props) => {
  */
 const mapState = (state) => {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    user: state.user
   }
 }
 

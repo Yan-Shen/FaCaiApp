@@ -10,22 +10,38 @@ const AuthForm = (props) => {
   const {name, displayName, handleSubmit, error} = props
 
   return (
-    <div>
-      <form onSubmit={handleSubmit} name={name}>
-        <div>
-          <label htmlFor="email"><small>Email</small></label>
-          <input name="email" type="text" />
+    <div id="loginContainer" className=".flex-container-row">
+      <div className="flex-container-row">
+
+        <form id="loginForm" className="flex-container-column" onSubmit={handleSubmit} name={name}>
+          <div>
+            {/* <label htmlFor="email"><small>Email</small></label> */}
+            <input name="email" placeholder="YOUR EMAIL" type="text" />
+          </div>
+
+          <div>
+            {/* <label htmlFor="password"><small>Password</small></label> */}
+            <input name="password" placeholder="YOUR PASSWORD" type="password" />
+          </div>
+
+          <div>
+            <button type="submit">{displayName}</button>
+          </div>
+
+          {error && error.response && <div> {error.response.data} </div>}
+        </form>
+        <div id="orContainer">
+          <div className="back-line">
+            <span>OR</span>
+          </div>
         </div>
-        <div>
-          <label htmlFor="password"><small>Password</small></label>
-          <input name="password" type="password" />
+        <div id="googleBtnContainer" >
+        <button id="googleBtn" href="/auth/google" className="flex-container-row">
+          <img src='../style/google.png'/>
+          <span>{displayName} with Google Account </span>
+        </button>
         </div>
-        <div>
-          <button type="submit">{displayName}</button>
-        </div>
-        {error && error.response && <div> {error.response.data} </div>}
-      </form>
-      <a href="/auth/google">{displayName} with Google</a>
+      </div>
     </div>
   )
 }
