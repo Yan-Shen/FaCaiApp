@@ -379,6 +379,10 @@ box-sizing: border-box;
 .detailItem{
   flex: 0 0 33%;
 }
+
+.detailAmount {
+color:#5d3ff4;
+}
 /*---------------------------- CHART SECTION ----------------------------*/
   .chartContainer {
     flex: 0 0 40%;

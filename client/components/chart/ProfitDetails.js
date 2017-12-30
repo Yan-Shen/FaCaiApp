@@ -26,7 +26,7 @@ const DetailRow = (props) => {
             },0)
             return (
               <div className="detailItem" key={category}>
-              <div>{formatCurrency(labeledAmount)}</div>
+              <div>{formatCurrency(labeledAmount).slice(0, -3)}</div>
               <span>{category}</span>
             </div>
             )
@@ -36,7 +36,7 @@ const DetailRow = (props) => {
           {
             props.nonLabeledTransactions &&
             <div className="detailItem">
-              <div>{formatCurrency(nonLabeledAmount, opts)}</div>
+              <div>{formatCurrency(nonLabeledAmount, opts).slice(0, -3)}</div>
               <span>Other</span>
           </div>
           }

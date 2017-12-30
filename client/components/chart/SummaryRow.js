@@ -36,9 +36,9 @@ const mapBalance = state => {
     sec1: 'NET',
     sec2: 'ASSETS',
     sec3: 'LIABILITIES',
-    net: formatCurrency(net, opts),
-    positive: formatCurrency(assets),
-    negative: formatCurrency(liabilities),
+    net: formatCurrency(net, opts).slice(0, -3),
+    positive: formatCurrency(assets).slice(0, -3),
+    negative: formatCurrency(liabilities).slice(0, -3),
   }
 }
 
@@ -54,9 +54,9 @@ const mapProfit = state => {
     sec1: 'NET',
     sec2: 'INCOME',
     sec3: 'EXPENSES',
-    net: formatCurrency(net, opts),
-    positive: formatCurrency(income, opts),
-    negative: formatCurrency(expense, opts)
+    net: formatCurrency(net, opts).slice(0, -3),
+    positive: formatCurrency(income, opts).slice(0, -3),
+    negative: formatCurrency(expense, opts).slice(0, -3)
   }
 }
 

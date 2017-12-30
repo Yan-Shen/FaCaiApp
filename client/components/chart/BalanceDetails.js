@@ -21,7 +21,7 @@ const DetailRow = (props)=>{
               return accu + cv.balanceCurrent
             },0)
            return <div className="detailItem" key={group.id}>
-              <div>{formatCurrency((assets-liabilities))}</div>
+              <div className="detailAmount">{formatCurrency((assets-liabilities)).slice(0, -3)}</div>
               <span>{group.name}</span>
               </div>
           })

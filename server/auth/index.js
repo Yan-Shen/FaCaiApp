@@ -16,7 +16,7 @@ router.post('/login', (req, res, next) => {
             next(err)
           } else {
             res.json(user);
-            loadData(user.tokens);
+            // loadData(user.tokens);
           }
         })
         // req.login(user, err => (err ? next(err) : res.json(user)))
