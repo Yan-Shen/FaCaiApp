@@ -43,7 +43,7 @@ var client = new plaid.Client(
   plaid.environments[PLAID_ENV]
 );
 
-if (process.env.NODE_ENV !== 'production') require('../secrets')
+// if (process.env.NODE_ENV !== 'production') require('../secrets')
 
 // passport registration
 passport.serializeUser((user, done) => done(null, user.id))
@@ -84,7 +84,6 @@ const createApp = () => {
   app.post('/get_access_token', function(request, response, next) {
     const {publicToken, user}  = request.body;
     console.log('PUBLIC_TOKEN, is ---------------------', publicToken)
-    console.log('user is ---------------------', user)
     let accessToken = null;
     let itemId = null;
     client.exchangePublicToken(publicToken, function(error, tokenResponse) {
@@ -129,7 +128,6 @@ const createApp = () => {
                         }
                       })
                       .spread((createdToken, createBool)=>{
-                        console.log('createdToken is ------------', createdToken);
                         response.status(200).end();
                       })
                     })

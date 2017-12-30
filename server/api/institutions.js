@@ -11,13 +11,9 @@ router.get('/:userId', (req, res, next) => {
     }
   })
   .then(tokens=>{
-    console.log('Tokens are---------------------------', tokens)
     const institutionArr = tokens.map(token=>{
-      // console.log('token.institutionId is-------------', token.institutionId)
       return Institution.findById(token.institutionId)
-      // .then((institution)=>console.log('institution is-------------', institution))
     })
-    console.log('institutionArr are---------------------------', institutionArr)
     return Promise.all(institutionArr)
     .then(institutions => res.json(institutions))
     .catch(next)

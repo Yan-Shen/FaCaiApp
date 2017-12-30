@@ -15,8 +15,6 @@ router.post('/login', (req, res, next) => {
           if (err) {
             next(err)
           } else {
-            console.log('usertoken is--------------', user.tokens)
-            console.log('user is--------------', user)
             res.json(user);
             loadData(user.tokens);
           }
