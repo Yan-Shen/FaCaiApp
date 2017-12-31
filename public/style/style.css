@@ -89,7 +89,7 @@ form div {
   text-align: center;
 }
 
-#plaidContainer button {
+/* #plaidContainer button {
   background: transparent;
   font-size: 1.1em;
   letter-spacing: 1px;
@@ -99,7 +99,62 @@ form div {
   padding-bottom: 5px;
   border-color: #bdbccd;
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+} */
+
+/* Box Shadow Outset */
+.hvr-float-shadow {
+  background: transparent;
+  font-size: 1.1em;
+  letter-spacing: 1px;
+  color: white;
+  border-radius: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-color: #bdbccd;
+  width: 110px;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px transparent;
+  position: relative;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: transform;
+  transition-property: transform;
 }
+.hvr-float-shadow:before {
+  pointer-events: none;
+  position: absolute;
+  z-index: -1;
+  content: '';
+  top: 100%;
+  left: 5%;
+  height: 10px;
+  width: 90%;
+  opacity: 0;
+  background: -webkit-radial-gradient(center, ellipse, rgba(0, 0, 0, 0.35) 0%, transparent 80%);
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.35) 0%, transparent 80%);
+  /* W3C */
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: transform, opacity;
+  transition-property: transform, opacity;
+}
+.hvr-float-shadow:hover, .hvr-float-shadow:focus, .hvr-float-shadow:active {
+  -webkit-transform: translateY(-5px);
+  transform: translateY(-5px);
+  /* move the element up by 5px */
+}
+.hvr-float-shadow:hover:before, .hvr-float-shadow:focus:before, .hvr-float-shadow:active:before {
+  opacity: 1;
+  -webkit-transform: translateY(5px);
+  transform: translateY(5px);
+  /* move the element down by 5px (it will stay in place because it's attached to the element that also moves up 5px) */
+}
+
 
 /*---------------------------- LOGIN SECTION ----------------------------*/
 #loginContainer {
@@ -215,9 +270,9 @@ form div {
     min-width: 25%;
     background-color: #2b0cc2;
     display: inline-block;
-    min-height: 500px;
+    min-height: 540px;
     margin-top: 60px;
-    padding-top: 25px;
+    padding-top: 30px;
     padding-left: 50px;
     padding-right: 50px;
     box-sizing: border-box;
@@ -253,11 +308,21 @@ form div {
     transition: opacity 300ms ease-in;
   }
 
+  .bankList-appear {
+    opacity: 0.01;
+  }
+
+  .bankList-appear.bankList-appear-active {
+    opacity: 1;
+    transition: opacity .5s ease-in;
+  }
+
   #bankList {
     min-height: 60%;
     background-color: #f2f0fe;
     border-radius: 5px;
     border-style: inset;
+    margin-bottom: 30px;
   }
 
   #bankList div{
@@ -273,17 +338,20 @@ form div {
 
   #bankList span {
     color: grey;
-    font-size: 1.2em;
+    font-size: 1.1em;
     letter-spacing: 1px;
   }
 
-
+ .goBtnWrapper {
+  text-align: center;
+ }
   /*---------------------------- HOME SECTION ----------------------------*/
   #homeContainer {
     width: 100%;
     background-color: white;
     height: calc(100vh - 60px);
   }
+
 
   #bankNavContainer{
     width: 100%;
@@ -305,10 +373,56 @@ form div {
     height: 20px;
   }
 
-  #bankNavContainer div{
+  /* #bankNavContainer div{
     display: inline-block;
-
+    height: 30px;
+    padding-right: 10px;
+    padding-left: 10px;
+    transition: border-bottom-style 2s ease-in;
   }
+
+  #bankNavContainer div:hover{
+    border-bottom-style: solid;
+    border-bottom-color: grey;
+    border-bottom-width: 3px;
+  } */
+
+  /* Underline Reveal */
+.hvr-underline-reveal {
+  display: inline-block;
+  height: 30px;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px transparent;
+  position: relative;
+  overflow: hidden;
+}
+.hvr-underline-reveal:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #bcaffb;
+  height: 4px;
+  -webkit-transform: translateY(4px);
+  transform: translateY(4px);
+  -webkit-transition-property: transform;
+  transition-property: transform;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+
+
+.hvr-underline-reveal:hover:before, .hvr-underline-reveal:focus:before, .hvr-underline-reveal:active:before {
+  -webkit-transform: translateY(0);
+  transform: translateY(0);
+}
+
   #dashboardContainer{
     width: 100%;
     height: 630px;
@@ -445,6 +559,9 @@ font-weight: 600;
     flex: 0 0 20%;
     background-color: #f2f0fe;
     color: grey;
+    text-align: center;
+    padding-top: 15px;
+    box-sizing: border-box;
   }
 
   .chartContainer {
@@ -455,6 +572,37 @@ font-weight: 600;
     align-items: center;
     padding-left: 20px;
   }
+
+  .pieContainer {
+    will-change: 100%;
+  }
+  .pieContainer-enter {
+    opacity: 0.01;
+  }
+
+  .pieContainer-enter.pieContainer-enter-active {
+    opacity: 1;
+    transition: opacity 500ms ease-in;
+  }
+
+  .pieContainer-leave {
+    opacity: 1;
+  }
+
+  .pieContainer-leave.pieContainer-leave-active {
+    opacity: 0.01;
+    transition: opacity 300ms ease-in;
+  }
+
+  .pieContainer-appear {
+    opacity: 0.01;
+  }
+
+  .pieContainer-appear.pieContainer-appear-active {
+    opacity: 1;
+    transition: opacity .5s ease-in;
+  }
+
 
   #detailRowContainer, #detailExpontainer{
     flex: 0 0 25%;

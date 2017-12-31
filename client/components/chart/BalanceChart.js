@@ -1,7 +1,7 @@
 import React from 'react';
 import { PieChart, Pie, Sector, Cell } from 'recharts';
 import createReactClass from 'create-react-class';
-
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 const data = [{name: 'Group A', value: 400}, {name: 'Group B', value: 300},
                   {name: 'Group C', value: 300}, {name: 'Group D', value: 200}];
@@ -23,6 +23,12 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, per
 const BalanceChart = createReactClass({
 	render () {
   	return (
+      <ReactCSSTransitionGroup
+      transitionName="pieContainer"
+      transitionAppear={true}
+      transitionAppearTimeout={500}
+      transitionEnterTimeout={500}
+      transitionLeaveTimeout={300}>
       <div className="chartContainer">
         <PieChart width={200} height={200} onMouseEnter={this.onPieEnter}>
           <Pie
@@ -42,6 +48,7 @@ const BalanceChart = createReactClass({
         </PieChart>
         <div>labels</div>
       </div>
+      </ReactCSSTransitionGroup>
     );
   }
 })

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+
 
 import {getAccountsThunk, getBanksThunk, getTransactionsThunk} from '../store'
 import {BalanceRow, ProfitRow} from './chart/SummaryRow';
@@ -26,17 +27,19 @@ class UserHome extends Component {
 
   render() {
     return (
+
         <div id="homeContainer" className="flex-container-column">
           <div id="bankNavContainer" className="flex-container-row">
-            <div><span>Summary</span></div>
+            <div className="hvr-underline-reveal"><span>Summary</span></div>
             {
               this.props.banks.map(bank=>{
-              return <div key={bank.id}><span>{bank.name}</span></div>
+              return <div className="hvr-underline-reveal" key={bank.id}><span>{bank.name}</span></div>
               })
             }
 
           </div>
           <div id="edge"/>
+
           <div id="dashboardContainer" className="flex-container-row">
             <div id="balance" className="flex-container-column halfSec">
               <h3>Balance</h3>
@@ -56,9 +59,13 @@ class UserHome extends Component {
                 <div className="chartTitleArea">Expenses by Vendor</div>
                   <LineBarAreaComposedChart />
               </div>
+
             </div>
+
           </div>
+
        </div>
+
      )
   }
 }

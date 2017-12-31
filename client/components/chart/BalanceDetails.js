@@ -1,5 +1,6 @@
 import React from 'react';
-import {connect} from 'react-redux'
+import {connect} from 'react-redux';
+
 
 const formatCurrency = require('format-currency')
 let opts = { format: '%s%v', symbol: '$' }
@@ -7,6 +8,7 @@ let opts = { format: '%s%v', symbol: '$' }
 const DetailRow = (props)=>{
 
     return (
+
       <div id="detailRowContainer" className="rowSec flex-container-wrap">
         {
           props.groups && props.groups.map(group=> {
@@ -23,13 +25,18 @@ const DetailRow = (props)=>{
             },0)
             const net = assets - liabilities;
             if(net <= 0) {highlight = {backgroundColor: "#f2f0fe"}} else {highlight = {backgroundColor: "white"}};
-           return <div className="detailItem" style={highlight} key={group.id}>
+
+           return (
+              <div className="detailItem" style={highlight} key={group.id}>
               <div className="detailAmount">{formatCurrency((net)).slice(0, -3)}</div>
               <span className="categoryName">{group.name}</span>
               </div>
+
+           )
           })
         }
       </div>
+
     )
 }
 

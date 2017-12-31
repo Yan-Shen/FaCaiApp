@@ -26,18 +26,21 @@ const Main = (props) => {
             ? <div>
               {/* The navbar will show these links after you log in */}
               {
-                (!props.location.pathname.includes('links')&&<Link to={`/links/${props.user.id}`}>link</Link>)}
+                (!props.location.pathname.includes('links')&&
+                <Link className="hvr-underline-reveal"
+                to={`/links/${props.user.id}`}>link</Link>)}
               {
                 props.location.pathname.includes('links') &&
-                <Link to={`/${props.user.id}`}>home</Link>
+                <Link to={`/${props.user.id}`} className="hvr-underline-reveal" >home</Link>
               }
-              <a href="#" onClick={handleClick}>logout</a>
+              <a className="hvr-underline-reveal"
+              href="#" onClick={handleClick}>logout</a>
             </div>
             : <div>
               {/* The navbar will show these links before you log in */}
 
-              <Link to="/login">login</Link>
-              <Link to="/signup">signup</Link>
+              <Link className="hvr-underline-reveal"  to="/login">login</Link>
+              <Link className="hvr-underline-reveal"  to="/signup">signup</Link>
             </div>
         }
       </nav>

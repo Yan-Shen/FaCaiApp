@@ -32,6 +32,8 @@ class BankList extends Component {
           <div id="bankList" >
             <ReactCSSTransitionGroup
             transitionName="bankList"
+            transitionAppear={true}
+            transitionAppearTimeout={500}
             transitionEnterTimeout={500}
             transitionLeaveTimeout={300}>
             {
@@ -45,8 +47,9 @@ class BankList extends Component {
               }
             </ReactCSSTransitionGroup>
           </div>
-          <div>
-            <button onClick={this.handleOnClick}>Go</button>
+          <div className="goBtnWrapper">
+            <button id="goBtn" className="hvr-float-shadow"
+            onClick={this.handleOnClick}>Go</button>
           </div>
       </div>
      )

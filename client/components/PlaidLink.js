@@ -85,7 +85,7 @@ class PlaidLink extends Component {
   render() {
     return (
       <div id="plaidContainer">
-        <button
+        <button className="hvr-float-shadow"
           onClick={this.handleOnClick}
         >
           <span>Add Links</span>
