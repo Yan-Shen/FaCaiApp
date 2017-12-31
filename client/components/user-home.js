@@ -42,7 +42,7 @@ class UserHome extends Component {
 
           <div id="dashboardContainer" className="flex-container-row">
             <div id="balance" className="flex-container-column halfSec">
-              <h3>Balance</h3>
+              <span className="sectionLabel">Balance</span>
               <BalanceRow />
               <BalanceDetails />
               {/* <div className="chartContainer">Chart</div> */}
@@ -52,7 +52,7 @@ class UserHome extends Component {
               </div>
             </div>
             <div id="exp" className="flex-container-column halfSec">
-              <h3>Income/Expense</h3>
+              <span className="sectionLabel">Income/Expense</span>
               <ProfitRow />
               <ProfitDetails />
               <div className="chartWrap">

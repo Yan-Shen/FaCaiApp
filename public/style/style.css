@@ -443,10 +443,12 @@ form div {
     padding-left: 11%;
   }
 
-  #balance h3, #exp h3{
-    flex: 0 0 5%;
+  .sectionLabel{
+    flex: 0 0 3%;
+    margin-top: 20px;
     margin-bottom: 0px;
     color: grey;
+    font-size: 1.1em;
   }
 
   #balance>div, #exp>div {
@@ -547,7 +549,7 @@ font-weight: 600;
   font-size: 0.8em;
   color: grey;
 }
-/*---------------------------- CHART SECTION ----------------------------*/
+/*---------------------------- BALANCE CHART SECTION ----------------------------*/
   .chartWrap {
     flex: 50%;
     display: flex;
@@ -603,11 +605,57 @@ font-weight: 600;
     transition: opacity .5s ease-in;
   }
 
-
-  #detailRowContainer, #detailExpontainer{
-    flex: 0 0 25%;
+  .balanceLabelContainer{
+    margin-left: 35px;
+    box-sizing: border-box
   }
 
-  .xAxis {
+  .eachBalanceLabel{
+    margin-bottom: 18px;
+  }
+
+  .className {
+    font-size: 0.9em;
+    margin-left: 3px;
+    margin-right: 3px;
+    color: gray;
+  }
+
+  .classAmount {
+    font-size: 0.8em;
+    color: #5d3ff4;
+    font-weight: 550;
+  }
+
+  .classPerc {
     font-size: 0.7em;
+    margin-left: 3px;
+    color: gray;
   }
+/*---------------------------- EXPENSE CHART SECTION ----------------------------*/
+#detailRowContainer, #detailExpontainer{
+  flex: 0 0 25%;
+}
+
+.xAxis .yAxis {
+  font-size: 0.6em;
+}
+
+.expenseChartContainer{
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.barChartContainer {
+  flex: 0 0 40%;
+  height: 90%;
+}
+
+.vendorLabelContainer {
+  flex: 0 0 40%;
+  margin-left: 30px;
+  height: 90%;
+}
+
+.eachVendoerLabel{
+  margin-bottom: 10px;
+}

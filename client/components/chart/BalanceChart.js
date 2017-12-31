@@ -1,28 +1,13 @@
 import React, { Component } from 'react';
 import { PieChart, Pie, Sector, Cell } from 'recharts';
-// import createReactClass from 'create-react-class';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import {connect} from 'react-redux';
 import _ from 'lodash';
 
 const formatCurrency = require('format-currency')
 
-const data = [{name: 'Group A', value: 400}, {name: 'Group B', value: 300},
-                  {name: 'Group C', value: 300}, {name: 'Group D', value: 200}];
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#c76aea', '#f66e85'];
 
-// const RADIAN = Math.PI / 180;
-// const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
-//  	const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-//   const x  = cx + radius * Math.cos(-midAngle * RADIAN);
-//   const y = cy  + radius * Math.sin(-midAngle * RADIAN);
-
-//   return (
-//     <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} 	dominantBaseline="central">
-//     	{`${(percent * 100).toFixed(0)}%`}
-//     </text>
-//   );
-// };
 
 class BalanceChart extends Component {
   constructor(props) {
@@ -33,6 +18,19 @@ class BalanceChart extends Component {
 	render () {
     const accounts = this.props.accounts;
     const assetClasses = _.groupBy(accounts, 'subtype');
+    const classNames = Object.keys(assetClasses)
+    const data = classNames.map(className => {
+      const amount = assetClasses[className].reduce((accumulator, currentElement)=>{
+        return accumulator + currentElement.balanceCurrent;
+      }, 0);
+      return {
+        name: className,
+        value: amount
+      }
+    })
+    const totalAmount = data.reduce((accumulator, currentElement) => {
+      return accumulator + currentElement.value
+    }, 0);
 
   	return (
       <ReactCSSTransitionGroup
@@ -58,16 +56,22 @@ class BalanceChart extends Component {
             }
           </Pie>
         </PieChart>
-        <div>
+        <div className="balanceLabelContainer">
           {
-            Object.keys(assetClasses) && Object.keys(assetClasses).map(assetClass => {
-              const amount = assetClasses[assetClass].reduce((accumulator, currentElement)=>{
-                return accumulator + currentElement.balanceCurrent;
-              }, 0);
+            data.map((entry, index) => {
+              const colorLable = {
+                width: "20px",
+                height: "5px",
+                backgroundColor: COLORS[index % COLORS.length],
+                display: "inline-block"
+              }
+              const percent = (entry.value / totalAmount * 100).toFixed(1)
               return (
-                <div key={assetClass}>
-                  <span>{assetClass}</span>
-                  <span>{formatCurrency(amount).slice(0, -3)}</span>
+                <div className="eachBalanceLabel" key={entry.name}>
+                  <div style={colorLable} />
+                  <span className="className">{entry.name}</span>
+                  <span className="classAmount">{formatCurrency(entry.value).slice(0, -3)}</span>
+                  <span className="classPerc">{percent}%</span>
                 </div>
               )
             })
@@ -88,3 +92,15 @@ const mapState = state => {
 
 export default connect(mapState)(BalanceChart);
 
+// const RADIAN = Math.PI / 180;
+// const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
+//  	const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+//   const x  = cx + radius * Math.cos(-midAngle * RADIAN);
+//   const y = cy  + radius * Math.sin(-midAngle * RADIAN);
+
+//   return (
+//     <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} 	dominantBaseline="central">
+//     	{`${(percent * 100).toFixed(0)}%`}
+//     </text>
+//   );
+// };
