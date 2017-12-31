@@ -6,6 +6,8 @@ import axios from 'axios'
 import {connect} from 'react-redux'
 import { withRouter } from 'react-router'
 
+import {getBanksThunk} from '../store'
+
 class PlaidLink extends Component {
   constructor(props) {
     super(props);
@@ -105,7 +107,6 @@ const mapState = state => {
 }
 
 const mapDispatch = (dispatch, ownProps) => {
-  console.log("ownProps is ----------------------", ownProps)
   const path = ownProps.match.path;
   const index = path.lastIndexOf('/');
   const userId = path.slice(index + 1);

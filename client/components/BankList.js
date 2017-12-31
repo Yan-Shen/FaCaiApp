@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import axios from 'axios';
-
+import PropTypes from 'prop-types'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import PlaidLink from './PlaidLink';
 import {getBanksThunk} from '../store'
+
+
 class BankList extends Component {
   constructor(props) {
     super(props);
@@ -26,16 +29,21 @@ class BankList extends Component {
     return (
       <div id="bankListContainer">
           <PlaidLink />
-          <div id="bankList">
-         {
-            this.props.banks &&  this.props.banks.map(bank=>{
-              return (
-                  <div key={bank.name}>
-                    <span >{bank.name.toLowerCase()}</span>
-                  </div>
-              )
-            })
-          }
+          <div id="bankList" >
+            <ReactCSSTransitionGroup
+            transitionName="bankList"
+            transitionEnterTimeout={500}
+            transitionLeaveTimeout={300}>
+            {
+                this.props.banks &&  this.props.banks.map(bank=>{
+                  return (
+                      <div key={bank.name}>
+                        <span >{bank.name.toLowerCase()}</span>
+                      </div>
+                  )
+                })
+              }
+            </ReactCSSTransitionGroup>
           </div>
           <div>
             <button onClick={this.handleOnClick}>Go</button>
@@ -45,10 +53,14 @@ class BankList extends Component {
   }
 }
 
-const mapState = state => {
+BankList.propTypes = {
+  show: PropTypes.bool.isRequired
+};
+
+const mapState = (state, ownProps) => {
   return {
     banks: state.banks,
-    user: state.user
+    user: state.user,
   }
 }
 
