@@ -1,27 +1,39 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { PieChart, Pie, Sector, Cell } from 'recharts';
-import createReactClass from 'create-react-class';
+// import createReactClass from 'create-react-class';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import {connect} from 'react-redux';
+import _ from 'lodash';
+
+const formatCurrency = require('format-currency')
 
 const data = [{name: 'Group A', value: 400}, {name: 'Group B', value: 300},
                   {name: 'Group C', value: 300}, {name: 'Group D', value: 200}];
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
-const RADIAN = Math.PI / 180;
-const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
- 	const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-  const x  = cx + radius * Math.cos(-midAngle * RADIAN);
-  const y = cy  + radius * Math.sin(-midAngle * RADIAN);
+// const RADIAN = Math.PI / 180;
+// const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
+//  	const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+//   const x  = cx + radius * Math.cos(-midAngle * RADIAN);
+//   const y = cy  + radius * Math.sin(-midAngle * RADIAN);
 
-  return (
-    <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} 	dominantBaseline="central">
-    	{`${(percent * 100).toFixed(0)}%`}
-    </text>
-  );
-};
+//   return (
+//     <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} 	dominantBaseline="central">
+//     	{`${(percent * 100).toFixed(0)}%`}
+//     </text>
+//   );
+// };
 
-const BalanceChart = createReactClass({
+class BalanceChart extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {  }
+  }
+
 	render () {
+    const accounts = this.props.accounts;
+    const assetClasses = _.groupBy(accounts, 'subtype');
+
   	return (
       <ReactCSSTransitionGroup
       transitionName="pieContainer"
@@ -37,73 +49,42 @@ const BalanceChart = createReactClass({
             cx={100}
             cy={100}
             labelLine={false}
-            label={renderCustomizedLabel}
+            // label={renderCustomizedLabel}
             outerRadius={90}
             fill="#8884d8"
           >
             {
-              data.map((entry, index) => <Cell fill={COLORS[index % COLORS.length]}/>)
+              data.map((entry, index) => <Cell key={index} fill={COLORS[index % COLORS.length]}/>)
             }
           </Pie>
         </PieChart>
-        <div>labels</div>
+        <div>
+          {
+            Object.keys(assetClasses) && Object.keys(assetClasses).map(assetClass => {
+              const amount = assetClasses[assetClass].reduce((accumulator, currentElement)=>{
+                return accumulator + currentElement.balanceCurrent;
+              }, 0);
+              return (
+                <div key={assetClass}>
+                  <span>{assetClass}</span>
+                  <span>{formatCurrency(amount).slice(0, -3)}</span>
+                </div>
+              )
+            })
+          }
+        </div>
       </div>
       </ReactCSSTransitionGroup>
     );
   }
-})
+}
 
-// const BalanceChart = ()=>{
-//     return (
-//       <div className="chartContainer">
-//         <PieChart width={730} height={250}>
-//           <Pie data={data} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={50} fill="#8884d8" label>
-//           </Pie>
-//       </PieChart>
-//       </div>
-//     )
-//   }
+const mapState = state => {
+  return {
+    groups: state.banks,
+    accounts: state.accounts
+  }
+}
 
-// })
+export default connect(mapState)(BalanceChart);
 
-export default BalanceChart;
-
-// const { PieChart, Pie, Sector, Cell } = Recharts;
-// const data = [{name: 'Group A', value: 400}, {name: 'Group B', value: 300},
-//                   {name: 'Group C', value: 300}, {name: 'Group D', value: 200}];
-// const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
-
-// const RADIAN = Math.PI / 180;
-// const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
-//  	const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-//   const x  = cx + radius * Math.cos(-midAngle * RADIAN);
-//   const y = cy  + radius * Math.sin(-midAngle * RADIAN);
-
-//   return (
-//     <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} 	dominantBaseline="central">
-//     	{`${(percent * 100).toFixed(0)}%`}
-//     </text>
-//   );
-// };
-
-// const SimplePieChart = React.createClass({
-// 	render () {
-//   	return (
-//     	<PieChart width={800} height={400} onMouseEnter={this.onPieEnter}>
-//         <Pie
-//           data={data}
-//           cx={300}
-//           cy={200}
-//           labelLine={false}
-//           label={renderCustomizedLabel}
-//           outerRadius={80}
-//           fill="#8884d8"
-//         >
-//         	{
-//           	data.map((entry, index) => <Cell fill={COLORS[index % COLORS.length]}/>)
-//           }
-//         </Pie>
-//       </PieChart>
-//     );
-//   }
-// })

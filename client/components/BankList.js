@@ -56,9 +56,9 @@ class BankList extends Component {
   }
 }
 
-BankList.propTypes = {
-  show: PropTypes.bool.isRequired
-};
+// BankList.propTypes = {
+//   show: PropTypes.bool.isRequired
+// };
 
 const mapState = (state, ownProps) => {
   return {

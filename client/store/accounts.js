@@ -14,7 +14,6 @@ export const getAccountsThunk = (userId) => {
     axios.get(`/api/accounts/${userId}`)
       .then(res=>res.data)
       .then(accounts=> {
-        console.log('accounts are -------------', accounts)
         dispatch(getAccounts(accounts))
       })
   }

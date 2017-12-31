@@ -14,7 +14,6 @@ export const getTransactionsThunk = (userId) => {
     axios.get(`/api/transactions/${userId}`)
       .then(res=>res.data)
       .then(transactions=> {
-        console.log('transactions are -------------', transactions)
         dispatch(getTransactions(transactions))
       })
   }
