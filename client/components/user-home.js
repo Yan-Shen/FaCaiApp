@@ -6,7 +6,8 @@ import {getAccountsThunk, getBanksThunk, getTransactionsThunk} from '../store'
 import {BalanceRow, ProfitRow} from './chart/SummaryRow';
 import {BalanceDetails} from './chart/BalanceDetails';
 import {ProfitDetails} from './chart/ProfitDetails';
-import BalanceChart from './chart/BalanceChart'
+import BalanceChart from './chart/BalanceChart';
+import LineBarAreaComposedChart from './chart/ExpenseChart'
 /**
  * COMPONENT
 //  */
@@ -41,13 +42,20 @@ class UserHome extends Component {
               <h3>Balance</h3>
               <BalanceRow />
               <BalanceDetails />
-              <BalanceChart />
+              {/* <div className="chartContainer">Chart</div> */}
+              <div className="chartWrap">
+                <div className="chartTitleArea">Asset Class %</div>
+                <BalanceChart />
+              </div>
             </div>
             <div id="exp" className="flex-container-column halfSec">
               <h3>Income/Expense</h3>
               <ProfitRow />
               <ProfitDetails />
-              <div className="chartContainer">Chart</div>
+              <div className="chartWrap">
+                <div className="chartTitleArea">Expenses by Vendor</div>
+                  <LineBarAreaComposedChart />
+              </div>
             </div>
           </div>
        </div>

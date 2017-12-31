@@ -1,6 +1,9 @@
+const router = require('express').Router()
 const moment = require('moment');
 const plaid = require('plaid');
-const {Institution, Account, Transaction} = require('./db/models');
+const {Institution, Account, Transaction, User, Token} = require('../db/models');
+module.exports = router;
+
 
 var startDate = moment().subtract(30, 'days').format('YYYY-MM-DD');
 var endDate = moment().format('YYYY-MM-DD');
@@ -12,7 +15,7 @@ const PLAID_PUBLIC_KEY='f74fcf55c0b94e51b2e5a3912667b0';
 const PLAID_ENV='sandbox';
 
 
-const loadData = function (tokenArr) {
+const loadData = tokenArr => {
 
   const client = new plaid.Client(
     PLAID_CLIENT_ID,
@@ -99,4 +102,16 @@ const loadData = function (tokenArr) {
   })
 }
 
-module.exports = loadData;
+router.post('/', (req, res, next)=>{
+  const {user}  = req.body;
+  Token.findAll({
+    where: {
+      userId: user.id
+    }
+  })
+  .then(tokens => {
+    loadData(tokens);
+  })
+  .then(() => res.status(200).send())
+  .catch(next)
+})

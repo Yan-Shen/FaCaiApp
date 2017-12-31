@@ -1,6 +1,5 @@
 const router = require('express').Router()
 const User = require('../db/models/user')
-const loadData = require('../plaid')
 module.exports = router
 
 router.post('/login', (req, res, next) => {

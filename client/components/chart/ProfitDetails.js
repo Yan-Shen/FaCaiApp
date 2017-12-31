@@ -14,20 +14,23 @@ const DetailRow = (props) => {
     .reduce((accu, cv)=> {
       return accu + cv.amount
     },0)
+    let highlight = null;
     return (
-      <div id="detailRowContainer" className="rowSec flex-container-wrap">
+      <div id="detailExpontainer" className="rowSec flex-container-wrap">
         {
 
           uniqCatogories && uniqCatogories.map(category => {
+
             const labeledAmount = props.labeledTransactions
             .filter(transaction=>transaction.category[0]===category)
             .reduce((accu, cv)=> {
               return accu + cv.amount
             },0)
+            if(labeledAmount < 0) {highlight = {backgroundColor: "#f2f0fe"}} else {highlight = {backgroundColor: "white"}}
             return (
-              <div className="detailItem" key={category}>
-              <div>{formatCurrency(labeledAmount).slice(0, -3)}</div>
-              <span>{category}</span>
+              <div className="detailItem" style={highlight} key={category}>
+              <div className="detailAmount">{formatCurrency(labeledAmount).slice(0, -3)}</div>
+              <span className="categoryName">{category}</span>
             </div>
             )
           })
@@ -35,9 +38,9 @@ const DetailRow = (props) => {
           }
           {
             props.nonLabeledTransactions &&
-            <div className="detailItem">
-              <div>{formatCurrency(nonLabeledAmount, opts).slice(0, -3)}</div>
-              <span>Other</span>
+            <div className="detailItem" style={highlight} >
+              <div className="detailAmount">{formatCurrency(nonLabeledAmount, opts).slice(0, -3)}</div>
+              <span className="categoryName">Other</span>
           </div>
           }
 

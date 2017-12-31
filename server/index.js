@@ -11,21 +11,9 @@ const sessionStore = new SequelizeStore({db})
 const PORT = process.env.PORT || 8080
 const app = express()
 const socketio = require('socket.io')
-const moment = require('moment');
-const plaid = require('plaid');
 
-const {Institution, Token} = require('./db/models');
-
-// const {Token} = require('./db/models');
 module.exports = app
 
-
-
-
-const PLAID_CLIENT_ID='5a39e7cfefe64e7803074b58';
-const PLAID_SECRET='33148810212bdb98f09993a25f4457';
-const PLAID_PUBLIC_KEY='f74fcf55c0b94e51b2e5a3912667b0';
-const PLAID_ENV='sandbox';
 /**
  * In your development environment, you can keep all of your
  * app's secret API keys in a file called `secrets.js`, in your project
@@ -34,14 +22,6 @@ const PLAID_ENV='sandbox';
  * keys as environment variables, so that they can still be read by the
  * Node process on process.env
  */
-
-// Initialize the Plaid client
-var client = new plaid.Client(
-  PLAID_CLIENT_ID,
-  PLAID_SECRET,
-  PLAID_PUBLIC_KEY,
-  plaid.environments[PLAID_ENV]
-);
 
 // if (process.env.NODE_ENV !== 'production') require('../secrets')
 
@@ -74,70 +54,6 @@ const createApp = () => {
   app.use(passport.session())
 
   // auth and api routes
-  app.post('/', function(request, response, next) {
-    response.json({
-      PLAID_PUBLIC_KEY: PLAID_PUBLIC_KEY,
-      PLAID_ENV: PLAID_ENV,
-    });
-  });
-
-  app.post('/get_access_token', function(request, response, next) {
-    const {publicToken, user}  = request.body;
-    console.log('PUBLIC_TOKEN, is ---------------------', publicToken)
-    let accessToken = null;
-    let itemId = null;
-    client.exchangePublicToken(publicToken, function(error, tokenResponse) {
-      if (error != null) {
-        var msg = 'Could not exchange public_token!';
-        console.log(msg + '\n' + error);
-        return response.json({
-          error: msg
-        });
-      }
-          accessToken = tokenResponse.access_token;
-          itemId = tokenResponse.item_id;
-          client.getItem(accessToken, function(error, itemResponse) {
-            if (error != null) {
-              console.log(JSON.stringify(error));
-              return response.json({
-                error: error
-              });
-            } else {
-              client.getInstitutionById(itemResponse.item.institution_id, function(err, instRes) {
-                if (err != null) {
-                  var msg = 'Unable to pull institution information from the Plaid API.';
-                  console.log(msg + '\n' + error);
-                  return response.json({
-                    error: msg
-                  });
-                } else {
-
-                  Institution.findOrCreate({
-                    where: {
-                      id: instRes.institution.institution_id,
-                      name: instRes.institution.name
-                    }
-                  })
-                    .then(()=>{
-                      Token.findOrCreate({
-                        where: {
-                          accessToken,
-                          itemId,
-                          userId: user.id,
-                          institutionId: itemResponse.item.institution_id
-                        }
-                      })
-                      .spread((createdToken, createBool)=>{
-                        response.status(200).end();
-                      })
-                    })
-                }
-              })
-            }
-      })
-      })
-
-})
 
   app.use('/auth', require('./auth'))
   app.use('/api', require('./api'))

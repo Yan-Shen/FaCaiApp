@@ -4,6 +4,7 @@ import React, { Component } from "react";
 import Script from "react-load-script";
 import axios from 'axios'
 import {connect} from 'react-redux'
+import { withRouter } from 'react-router'
 
 class PlaidLink extends Component {
   constructor(props) {
@@ -27,7 +28,7 @@ class PlaidLink extends Component {
   };
 
   onScriptLoaded = () => {
-    axios.post('/')
+    axios.post('/api/tokens')
       .then(res=>res.data)
       .then(res=> {
         window.linkHandler = window.Plaid.create({
@@ -53,8 +54,9 @@ class PlaidLink extends Component {
   };
 
   handleOnSuccess (publicToken, metadata) {
-    axios.post('/get_access_token',
+    axios.post('/api/tokens/get_access_token',
     {publicToken, user: this.props.user})
+      .then(()=> this.props.loadInstitions())
       // .then(()=> this.props.loadInstition())
       // .then(()=> this.props.loadAccounts())
       // .then(()=> this.props.history.push('/banklist'))
@@ -79,7 +81,6 @@ class PlaidLink extends Component {
   };
 
   render() {
-    console.log('this.props is -------------', this.props)
     return (
       <div id="plaidContainer">
         <button
@@ -102,4 +103,17 @@ const mapState = state => {
     user: state.user,
   }
 }
-export default connect(mapState)(PlaidLink);
+
+const mapDispatch = (dispatch, ownProps) => {
+  console.log("ownProps is ----------------------", ownProps)
+  const path = ownProps.match.path;
+  const index = path.lastIndexOf('/');
+  const userId = path.slice(index + 1);
+  return {
+    loadInstitions(){
+      dispatch(getBanksThunk(userId))
+    },
+  }
+}
+
+export default withRouter(connect(mapState, mapDispatch)(PlaidLink));

@@ -321,6 +321,7 @@ form div {
     border-width: 0.3px;
     width: 92%;
     box-sizing:border-box;
+    margin-top: 10px;
   }
 
   #exp{
@@ -358,14 +359,17 @@ form div {
 
  #netContainer>span, #assetContainer>span, #liabilityContainer>span{
   color:#5d3ff4;
+  font-weight: 600;
  }
 
  #netContainer>span {
   font-size: 1.3em;
+
  }
  #assetContainer>span, #liabilityContainer>span{
   font-size: 0.9em;
   color:#5d3ff4;
+
  }
 
 .setPadding {
@@ -374,18 +378,68 @@ padding-bottom:35px;
 box-sizing: border-box;
 }
 
+.addColor{
+  background-color: #f2f0fe;
+}
+
+.greyFont {
+  color: grey;
+}
+
 /*---------------------------- DETAIL ROW SECTION ----------------------------*/
 
 .detailItem{
-  flex: 0 0 33%;
+  flex: 0 0 33.333%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  border-style: solid;
+  border-width: 0.1px;
+  border-color: #e5eafb;
+  box-sizing: border-box;
 }
 
 .detailAmount {
 color:#5d3ff4;
+text-align: center;
+font-size: 0.9em;
+font-weight: 600;
+}
+
+.categoryName {
+  font-size: 0.8em;
+  color: grey;
 }
 /*---------------------------- CHART SECTION ----------------------------*/
+  .chartWrap {
+    flex: 50%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .chartTitleArea{
+    width: 100%;
+    flex: 0 0 20%;
+    background-color: #f2f0fe;
+    color: grey;
+  }
+
   .chartContainer {
-    flex: 0 0 40%;
-    margin-top: 10px;
-    height: 160px;
+    flex: 0 0 80%;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+  }
+
+  #detailRowContainer, #detailExpontainer{
+    flex: 0 0 25%;
+  }
+
+  .xAxis {
+    font-size: 0.7em;
   }

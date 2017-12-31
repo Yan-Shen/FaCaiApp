@@ -17,7 +17,7 @@ const Main = (props) => {
     <div id="navContainer"className="flex-container-row flex-container-spaceBtw fullWidth">
       <div className="flex-container-row">
         <img src="../style/logo.png" />
-        <h1>FaCaiApp</h1>
+        <h1>LINKapp</h1>
       </div>
       <nav>
 
