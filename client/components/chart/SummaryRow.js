@@ -24,13 +24,16 @@ const SummaryRow = (props)=>{
       </div>
      )
 }
+
 const mapBalance = state => {
-  const assets = state.accounts.filter(account=> account.type!=='credit').reduce((accu, cur)=>{
-    return accu + cur.balanceCurrent;
-  }, 0);
-  const liabilities = state.accounts.filter(account=> account.type==='credit').reduce((accu, cur)=>{
-    return accu + cur.balanceCurrent;
-  }, 0);
+  const assets = state.accounts.filter(account=> account.type!=='credit')
+    .reduce((accu, cur)=>{
+      return accu + cur.balanceCurrent;
+    }, 0);
+  const liabilities = state.accounts.filter(account=> account.type==='credit')
+    .reduce((accu, cur)=>{
+      return accu + cur.balanceCurrent;
+    }, 0);
   const net = assets - liabilities;
   return {
     sec1: 'NET',
@@ -42,13 +45,64 @@ const mapBalance = state => {
   }
 }
 
+const mapSingleBankBalance = (state, ownProps) => {
+  const assets = state.accounts.filter(account=> account.type!=='credit')
+    .filter(account => account.institutionId === ownProps.currentBank.id)
+    .reduce((accu, cur) => {
+      return accu + cur.balanceCurrent;
+    }, 0);
+  const liabilities = state.accounts.filter(account=> account.type==='credit')
+    .filter(account => account.institutionId === ownProps.currentBank.id)
+    .reduce((accu, cur)=>{
+      return accu + cur.balanceCurrent;
+    }, 0);
+  const net = assets - liabilities;
+  return {
+    sec1: 'NET',
+    sec2: 'ASSETS',
+    sec3: 'LIABILITIES',
+    net: formatCurrency(net, opts).slice(0, -3),
+    positive: formatCurrency(assets).slice(0, -3),
+    negative: formatCurrency(liabilities).slice(0, -3),
+  }
+}
+
+
 const mapProfit = state => {
-  const income = state.transactions.filter(transaction=>transaction.amount<0).reduce((accu, cur)=>{
-    return accu + cur.amount;
-  }, 0);
-  const expense = state.transactions.filter(transaction=>transaction.amount>0).reduce((accu, cur)=>{
-    return accu + cur.amount;
-  }, 0);
+  const income = state.transactions
+    .filter(transaction=>transaction.amount<0)
+    .reduce((accu, cur)=>{
+      return accu + cur.amount;
+    }, 0);
+  const expense = state.transactions
+    .filter(transaction=>transaction.amount>0)
+    .reduce((accu, cur)=>{
+      return accu + cur.amount;
+    }, 0);
+  const net = income + expense;
+  return {
+    sec1: 'NET',
+    sec2: 'INCOME',
+    sec3: 'EXPENSES',
+    net: formatCurrency(net, opts).slice(0, -3),
+    positive: formatCurrency(income, opts).slice(0, -3),
+    negative: formatCurrency(expense, opts).slice(0, -3)
+  }
+}
+
+const mapSingleBankProfit = (state, ownProps) => {
+  const income = state.transactions
+    .filter(transaction => transaction.account.institutionId === ownProps.currentBank.id)
+    .filter(transaction=>transaction.amount<0)
+    .reduce((accu, cur)=>{
+      return accu + cur.amount;
+    }, 0);
+  const expense = state.transactions
+    .filter(transaction => transaction.account.institutionId === ownProps.currentBank.id)
+    .filter(transaction=>transaction.amount>0)
+    .reduce((accu, cur)=>{
+      return accu + cur.amount;
+    }, 0);
   const net = income + expense;
   return {
     sec1: 'NET',
@@ -61,5 +115,8 @@ const mapProfit = state => {
 }
 
 export const BalanceRow = connect(mapBalance)(SummaryRow);
+export const SingleBankBalanceRow = connect(mapSingleBankBalance)(SummaryRow);
 export const ProfitRow = connect(mapProfit)(SummaryRow);
+export const SingleBankProfitRow = connect(mapSingleBankProfit)(SummaryRow);
+
 

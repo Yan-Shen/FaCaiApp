@@ -5,8 +5,8 @@ import {connect} from 'react-redux';
 
 import {getAccountsThunk, getBanksThunk, getTransactionsThunk, getCurrentBank} from '../store'
 
-import {BalanceRow, ProfitRow} from './chart/SummaryRow';
-import {BalanceDetails} from './chart/BalanceDetails';
+import {SingleBankBalanceRow, SingleBankProfitRow} from './chart/SummaryRow';
+import {SingleBankBalanceDetails} from './chart/BalanceDetails';
 import {ProfitDetails} from './chart/ProfitDetails';
 import { BankHeader } from './BankHeader';
 
@@ -25,22 +25,21 @@ class InstitutionHome extends Component {
             setInstitution={this.props.setInstitution}
             userId={this.props.userId} />
           <div id="edge" />
-          <h1>{this.props.currentBank.name}</h1>
-          <div id="dashboardContainer" className="flex-container-row">
+          <h3>{this.props.currentBank.name}</h3>
 
+          <div id="dashboardContainer" className="flex-container-row">
             <div id="balance" className="flex-container-column halfSec">
               <span className="sectionLabel">Balance</span>
-              <BalanceRow />
-              <BalanceDetails />
+              <SingleBankBalanceRow currentBank={this.props.currentBank} />
+              <SingleBankBalanceDetails currentBank={this.props.currentBank} />
             </div>
             <div id="exp" className="flex-container-column halfSec">
               <span className="sectionLabel">Income/Expense</span>
-              <ProfitRow />
+              <SingleBankProfitRow currentBank={this.props.currentBank} />
               <ProfitDetails />
-
             </div>
-
           </div>
+
           <div>transaction list</div>
        </div>
 

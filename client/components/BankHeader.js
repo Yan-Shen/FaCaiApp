@@ -11,7 +11,6 @@ export class BankHeader extends Component {
   }
 
   render() {
-    console.log('this props at bankheader is ----------------', this.props)
     return (
       <div id="bankNavContainer" className="flex-container-row">
             <NavLink to={`/${this.props.userId}`} activeClassName="active">
