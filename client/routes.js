@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {Route, Switch, Router} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
-import {Nav, Login, Signup, BankList, Accounts, UserHome} from './components'
+import {Nav, Login, Signup, BankList, Accounts, UserHome, InstitutionHome} from './components'
 import {me} from './store'
 /**
  * COMPONENT
@@ -15,7 +15,6 @@ class Routes extends Component {
 
   render () {
     const {isLoggedIn} = this.props
-
     return (
       <div>
 
@@ -33,6 +32,8 @@ class Routes extends Component {
                       {/* Routes placed here are only available after logging in */}
                       <Route exact path={`/links/${this.props.userId}`} component={BankList} />
                       <Route exact path={`/${this.props.userId}`} component={UserHome} />
+                      <Route exact path={`/${this.props.userId}/${this.props.currentBank.id}`} component={InstitutionHome} />
+                      {/* <Route exact path={`/${this.props.userId}`} component={UserHome} /> */}
                     </Switch>
                 }
                 {/* Displays our Login component as a fallback */}
@@ -53,7 +54,8 @@ const mapState = (state) => {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
     isLoggedIn: !!state.user.id,
-    userId: state.user.id
+    userId: state.user.id,
+    currentBank: state.currentBank,
   }
 }
 

@@ -6,8 +6,9 @@ import user from './user'
 import accounts from './accounts'
 import banks from './banks'
 import transactions from './transactions'
+import currentBank from './currentBank'
 
-const reducer = combineReducers({user, accounts, banks, transactions})
+const reducer = combineReducers({user, accounts, banks, transactions, currentBank})
 const middleware = composeWithDevTools(applyMiddleware(
   thunkMiddleware,
   createLogger({collapsed: true})
@@ -18,4 +19,5 @@ export default store
 export * from './user'
 export * from './accounts'
 export * from './banks';
-export * from './transactions'
+export * from './transactions';
+export * from './currentBank';

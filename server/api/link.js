@@ -1,9 +1,7 @@
-const router = require('express').Router()
+const linkRouter = require('express').Router()
 const moment = require('moment');
 const plaid = require('plaid');
-const {Institution, Account, Transaction, User, Token} = require('../db/models');
-module.exports = router;
-
+const {Account, Transaction, User, Token} = require('../db/models');
 
 var startDate = moment().subtract(30, 'days').format('YYYY-MM-DD');
 var endDate = moment().format('YYYY-MM-DD');
@@ -26,53 +24,75 @@ const loadData = tokenArr => {
 
   tokenArr.map(token=>{
     return new Promise ((res, rej)=>{
-      client.getItem(token.accessToken, function(error, itemResponse) {
-        if (error != null) {
-          console.log(JSON.stringify(error));
-        } else {
-          client.getInstitutionById(itemResponse.item.institution_id, function(err, instRes) {
-            if (err != null) {
-              var msg = 'Unable to pull institution information from the Plaid API.';
-              console.log(msg + '\n' + error);
-            } else {
-              console.log('itemResponse is ---------------', itemResponse);
-              console.log('instRes is ---------------', instRes);
+      // client.getItem(token.accessToken, function(error, itemResponse) {
+      //   if (error != null) {
+      //     console.log(JSON.stringify(error));
+      //   } else {
+      //     client.getInstitutionById(itemResponse.item.institution_id, function(err, instRes) {
+      //       if (err != null) {
+      //         var msg = 'Unable to pull institution information from the Plaid API.';
+      //         console.log(msg + '\n' + error);
+      //       } else {
+      //         console.log('itemResponse is ---------------', itemResponse);
+      //         console.log('instRes is ---------------', instRes);
 
-              Institution.findOrCreate({
-                where: {
-                  id: instRes.institution.institution_id,
-                  name: instRes.institution.name
-                }
-              })
+      //         Institution.findOrCreate({
+      //           where: {
+      //             id: instRes.institution.institution_id,
+      //             name: instRes.institution.name
+      //           }
+      //         })
+      //       }
+      //     })
+      //   }
+      //   })
+      //   res('Promise success!');
+      const createdAccounts =[];
+      client.getAuth(token.accessToken, function(error, authResponse) {
+        if (error != null) {
+          var msg = 'Unable to pull accounts from the Plaid API.';
+          console.log(msg + '\n' + error);
+        }
+        console.log('authResponse is ---------------', authResponse);
+        authResponse.accounts.map(account=>{
+          Account.findOrCreate({
+            where: {
+              id: account.account_id,
+              name: account.name,
+              balanceCurrent: account.balances.current,
+              type: account.type,
+              subtype: account.subtype,
+              institutionId: authResponse.item.institution_id,
+              userId: token.userId,
             }
           })
-        }
+          .then(account=>createdAccounts.push(account))
         })
-        res('Promise success!');
+      });
+      res(createdAccounts);
       })
-        .then(()=>{
-          client.getAuth(token.accessToken, function(error, authResponse) {
-            if (error != null) {
-              var msg = 'Unable to pull accounts from the Plaid API.';
-              console.log(msg + '\n' + error);
-            }
-            console.log('authResponse is ---------------', authResponse);
-            authResponse.accounts.map(account=>{
-              Account.findOrCreate({
-                where: {
-                  id: account.account_id,
-                  name: account.name,
-                  balanceCurrent: account.balances.current,
-                  type: account.type,
-                  subtype: account.subtype,
-                  institutionId: authResponse.item.institution_id,
-                  userId: token.userId,
-                }
-              })
-            })
-          });
-
-        })
+        // .then(()=>{
+        //   client.getAuth(token.accessToken, function(error, authResponse) {
+        //     if (error != null) {
+        //       var msg = 'Unable to pull accounts from the Plaid API.';
+        //       console.log(msg + '\n' + error);
+        //     }
+        //     console.log('authResponse is ---------------', authResponse);
+        //     authResponse.accounts.map(account=>{
+        //       Account.findOrCreate({
+        //         where: {
+        //           id: account.account_id,
+        //           name: account.name,
+        //           balanceCurrent: account.balances.current,
+        //           type: account.type,
+        //           subtype: account.subtype,
+        //           institutionId: authResponse.item.institution_id,
+        //           userId: token.userId,
+        //         }
+        //       })
+        //     })
+        //   });
+        // })
           .then(()=>{
             client.getTransactions(token.accessToken, startDate, endDate, {
               count: 5,
@@ -102,7 +122,7 @@ const loadData = tokenArr => {
   })
 }
 
-router.post('/', (req, res, next)=>{
+linkRouter.post('/', (req, res, next)=>{
   const {user}  = req.body;
   Token.findAll({
     where: {
@@ -110,8 +130,10 @@ router.post('/', (req, res, next)=>{
     }
   })
   .then(tokens => {
-    loadData(tokens);
+    return loadData(tokens);
   })
   .then(() => res.status(200).send())
   .catch(next)
 })
+
+module.exports = {linkRouter, loadData};

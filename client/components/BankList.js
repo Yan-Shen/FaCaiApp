@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import axios from 'axios';
@@ -5,8 +6,7 @@ import PropTypes from 'prop-types'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import PlaidLink from './PlaidLink';
-import {getBanksThunk} from '../store'
-
+import {getAccountsThunk, getBanksThunk, getTransactionsThunk} from '../store'
 
 class BankList extends Component {
   constructor(props) {
@@ -16,12 +16,13 @@ class BankList extends Component {
   }
 
   componentDidMount(){
-    // console.log('this.props is-------------------', this.props)
     this.props.loadInstitions()
   }
 
   handleOnClick(){
     axios.post('/api/link', {user: this.props.user})
+      .then(res=> this.props.loadAccounts())
+      .then(res=> this.props.loadTransactions())
       .then(res=>this.props.history.push(`/${this.props.user.id}`))
   }
 
@@ -72,9 +73,15 @@ const mapDispatch = (dispatch, ownProps) => {
   const index = path.lastIndexOf('/');
   const userId = path.slice(index + 1);
   return {
+    loadAccounts(){
+      dispatch(getAccountsThunk(userId))
+    },
     loadInstitions(){
       dispatch(getBanksThunk(userId))
     },
+    loadTransactions(){
+      dispatch(getTransactionsThunk(userId))
+    }
   }
 }
 

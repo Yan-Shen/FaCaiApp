@@ -9,6 +9,7 @@ import _ from 'lodash';
 //               {name: 'Apple', uv: 1520, pv: 1108, amt: 1100},
 //               {name: 'Outback', uv: 1400, pv: 680, amt: 1700}];
 const formatCurrency = require('format-currency')
+let opts = { format: '%s%v', symbol: '$' }
 
 class LineBarAreaComposedChart extends Component {
 	render () {
@@ -28,7 +29,7 @@ class LineBarAreaComposedChart extends Component {
    const data = _.sortBy(unfilteredData, [function(o) { return -(o.amount); }]).slice(0, 6)
                 .map((entry, index) => {
                   return {
-                    name: entry.name,
+                    name: entry.name.toLowerCase(),
                     amount: entry.amount,
                     rank: index + 1,
                   }
@@ -37,13 +38,16 @@ class LineBarAreaComposedChart extends Component {
       return accumulator + currentElement.amount
     }, 0);
 
+    const axisLable = {
+      fontSize: '0.8em'
+    }
   	return (
       <div className="flex-container-row expenseChartContainer">
         <div className='barChartContainer'>
           <ComposedChart width={300} height={220} data={data}
               margin={{top: 20, right: 20, bottom: 20, left: 20}}>
-            <XAxis dataKey="rank" className="xAxis" />
-            <YAxis className="yAxis"/>
+            <XAxis dataKey="rank" style={axisLable} />
+            <YAxis style={axisLable} />
             <Tooltip/>
             {/* <Legend/> */}
             <CartesianGrid stroke='#f5f5f5'/>

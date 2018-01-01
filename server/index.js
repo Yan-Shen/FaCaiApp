@@ -11,6 +11,8 @@ const sessionStore = new SequelizeStore({db})
 const PORT = process.env.PORT || 8080
 const app = express()
 const socketio = require('socket.io')
+// const {Account, Transaction, User, Token} = require('../db/models');
+// const {loadData} = require('./api/link')
 
 module.exports = app
 
@@ -53,10 +55,29 @@ const createApp = () => {
   app.use(passport.initialize())
   app.use(passport.session())
 
+  // create a scheduled job to pull update accounts and transations for all users
+  // need real user data to test this function (to see whether new accounts and transactions are posted)
+
+  // User.findAll()
+  //   .then(users => {
+  //     return users.map(user => {
+  //       Token.findAll({
+  //         where: {
+  //           userId: user.id
+  //         }
+  //       })
+  //       .then(tokens => {
+  //         return loadData(tokens);
+  //       })
+  //     })
+  //   })
+  //   .then(() => console.log('loaded accounts and transactions data for all users'))
+
   // auth and api routes
 
   app.use('/auth', require('./auth'))
   app.use('/api', require('./api'))
+
 
   // static file-serving middleware
   app.use(express.static(path.join(__dirname, '..', 'public')))
