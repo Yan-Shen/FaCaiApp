@@ -7,7 +7,7 @@ import {getAccountsThunk, getBanksThunk, getTransactionsThunk, getCurrentBank} f
 
 import {SingleBankBalanceRow, SingleBankProfitRow} from './chart/SummaryRow';
 import {SingleBankBalanceDetails} from './chart/BalanceDetails';
-import {ProfitDetails} from './chart/ProfitDetails';
+import {SingleBankProfitDetails} from './chart/ProfitDetails';
 import { BankHeader } from './BankHeader';
 
 
@@ -36,7 +36,7 @@ class InstitutionHome extends Component {
             <div id="exp" className="flex-container-column halfSec">
               <span className="sectionLabel">Income/Expense</span>
               <SingleBankProfitRow currentBank={this.props.currentBank} />
-              <ProfitDetails />
+              <SingleBankProfitDetails currentBank={this.props.currentBank}/>
             </div>
           </div>
 

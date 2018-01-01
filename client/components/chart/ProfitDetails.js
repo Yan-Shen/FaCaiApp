@@ -7,26 +7,27 @@ let opts = { format: '%s%v', symbol: '$' }
 
 const DetailRow = (props) => {
     const categories = _.map(props.labeledTransactions, _.property('category'))
-    .map(category => category[0]);
+      .map(category => category[0]);
     const uniqCatogories = _.uniq(categories)
-
     const nonLabeledAmount = props.nonLabeledTransactions
-    .reduce((accu, cv)=> {
-      return accu + cv.amount
-    },0)
+      .reduce((accu, cv) => {
+        return accu + cv.amount
+      }, 0)
     let highlight = null;
     return (
       <div id="detailExpontainer" className="rowSec flex-container-wrap">
         {
-
           uniqCatogories && uniqCatogories.map(category => {
-
             const labeledAmount = props.labeledTransactions
-            .filter(transaction=>transaction.category[0]===category)
-            .reduce((accu, cv)=> {
+            .filter(transaction => transaction.category[0] === category)
+            .reduce((accu, cv) => {
               return accu + cv.amount
-            },0)
-            if(labeledAmount < 0) {highlight = {backgroundColor: "#f2f0fe"}} else {highlight = {backgroundColor: "white"}}
+            }, 0)
+            if (labeledAmount < 0) {
+                highlight = {backgroundColor: "#f2f0fe"}
+              } else {
+                highlight = {backgroundColor: "white"}
+              }
             return (
               <div className="detailItem" style={highlight} key={category}>
               <div className="detailAmount">{formatCurrency(labeledAmount).slice(0, -3)}</div>
@@ -34,16 +35,14 @@ const DetailRow = (props) => {
             </div>
             )
           })
-
-          }
-          {
-            props.nonLabeledTransactions &&
-            <div className="detailItem" style={highlight} >
-              <div className="detailAmount">{formatCurrency(nonLabeledAmount, opts).slice(0, -3)}</div>
-              <span className="categoryName">Other</span>
-          </div>
-          }
-
+        }
+        {
+          props.nonLabeledTransactions &&
+          <div className="detailItem" style={highlight} >
+            <div className="detailAmount">{formatCurrency(nonLabeledAmount, opts).slice(0, -3)}</div>
+            <span className="categoryName">Other</span>
+        </div>
+        }
       </div>
     )
 }
@@ -55,6 +54,26 @@ const mapState = state => {
     accounts: state.accounts
   }
 }
+const mapSingleBankState = (state, ownProps) => {
+  console.log('ownprops of profit details single bank state is------------------', ownProps)
+  return {
+    labeledTransactions:
+      state.transactions
+      .filter(transaction => {
+        return transaction.account.institutionId === ownProps.currentBank.id
+      })
+      .filter(transaction => {
+        console.log('transaction is ----------------', transaction)
+       return transaction.category !==null
+      }),
+    nonLabeledTransactions:
+      state.transactions
+      .filter(transaction => transaction.account.institutionId === ownProps.currentBank.id)
+      .filter(transaction => transaction.category ===null),
+    accounts: state.accounts
+  }
+}
 
 export const ProfitDetails = connect(mapState)(DetailRow);
+export const SingleBankProfitDetails = connect(mapSingleBankState)(DetailRow);
 
