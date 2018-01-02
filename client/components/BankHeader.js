@@ -13,18 +13,25 @@ export class BankHeader extends Component {
   render() {
     return (
       <div id="bankNavContainer" className="flex-container-row">
-            <NavLink to={`/${this.props.userId}`} activeClassName="active">
-                <div className="hvr-underline-reveal">
+            <NavLink
+            exact to={`/${this.props.userId}`}
+            className="hvr-underline-reveal"
+            activeClassName="active" >
+                {/* <div className="hvr-underline-reveal"> */}
                   <span>Summary</span>
-                </div>
+                {/* </div> */}
             </NavLink>
             {
               this.props.banks && this.props.banks.map(bank => {
               return (
-                <NavLink to={`/${this.props.userId}/${bank.id}`} activeClassName="active" key={bank.id}>
-                  <div className="hvr-underline-reveal" >
-                    <button onClick={(evt) => this.props.setInstitution(bank)}>{bank.name}</button>
-                  </div>
+                <NavLink
+                to={`/${this.props.userId}/${bank.id}`}
+                className="hvr-underline-reveal"
+                activeClassName="active"
+                key={bank.id}>
+                  {/* <div className="hvr-underline-reveal" > */}
+                    <span className="bankBtn" onClick={(evt) => this.props.setInstitution(bank)}>{bank.name}</span>
+                  {/* </div> */}
                 </NavLink>
               )
 

@@ -32,7 +32,8 @@ class Routes extends Component {
                       {/* Routes placed here are only available after logging in */}
                       <Route exact path={`/links/${this.props.userId}`} component={BankList} />
                       <Route exact path={`/${this.props.userId}`} component={UserHome} />
-                      <Route exact path={`/${this.props.userId}/${this.props.currentBank.id}`} component={InstitutionHome} />
+                      {/* <Route exact path={`/${this.props.userId}/${this.props.currentBank.id}`} component={InstitutionHome} /> */}
+                       <Route exact path={`/:userId/:institutionId`} component={InstitutionHome} />
                       {/* <Route exact path={`/${this.props.userId}`} component={UserHome} /> */}
                     </Switch>
                 }
@@ -64,7 +65,6 @@ const mapDispatch = (dispatch) => {
     loadInitialData () {
       dispatch(me())
     },
-
   }
 }
 
