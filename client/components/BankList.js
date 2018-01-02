@@ -24,15 +24,18 @@ class BankList extends Component {
       .then(res => this.props.loadAccounts())
       .then(res => this.props.loadTransactions())
       .then(res => {
-        this.props.history.push(`/${this.props.user.id}`)
-      })
-      .then(()=>{
         const load = () => {
-          location.reload();
-          console.log('timeout is called!!!!!!!!!!!!!!!!!!!!!!!!')
+          this.props.history.push(`/${this.props.user.id}`)
         }
         setTimeout(load, 2000);
+        // this.props.history.push(`/${this.props.user.id}`)
       })
+      // .then(()=>{
+      //   const load = () => {
+      //     location.reload();
+      //   }
+      //   setTimeout(load, 2000);
+      // })
   }
 
   render() {
