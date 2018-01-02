@@ -71,7 +71,7 @@ class BalanceChart extends Component {
                   <div style={colorLable} />
                   <span className="className">{entry.name}</span>
                   <span className="classAmount">{formatCurrency(entry.value).slice(0, -3)}</span>
-                  <span className="classPerc">{percent}%</span>
+                  <span className="classPerc greyBox">{percent}%</span>
                 </div>
               )
             })

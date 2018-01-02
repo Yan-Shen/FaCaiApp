@@ -22,105 +22,54 @@ const loadData = tokenArr => {
     plaid.environments[PLAID_ENV]
   );
 
-  tokenArr.map(token=>{
-    return new Promise ((res, rej)=>{
-      // client.getItem(token.accessToken, function(error, itemResponse) {
-      //   if (error != null) {
-      //     console.log(JSON.stringify(error));
-      //   } else {
-      //     client.getInstitutionById(itemResponse.item.institution_id, function(err, instRes) {
-      //       if (err != null) {
-      //         var msg = 'Unable to pull institution information from the Plaid API.';
-      //         console.log(msg + '\n' + error);
-      //       } else {
-      //         console.log('itemResponse is ---------------', itemResponse);
-      //         console.log('instRes is ---------------', instRes);
-
-      //         Institution.findOrCreate({
-      //           where: {
-      //             id: instRes.institution.institution_id,
-      //             name: instRes.institution.name
-      //           }
-      //         })
-      //       }
-      //     })
-      //   }
-      //   })
-      //   res('Promise success!');
-      const createdAccounts =[];
-      client.getAuth(token.accessToken, function(error, authResponse) {
-        if (error != null) {
-          var msg = 'Unable to pull accounts from the Plaid API.';
-          console.log(msg + '\n' + error);
-        }
-        console.log('authResponse is ---------------', authResponse);
-        authResponse.accounts.map(account=>{
-          Account.findOrCreate({
-            where: {
-              id: account.account_id,
-              name: account.name,
-              balanceCurrent: account.balances.current,
-              type: account.type,
-              subtype: account.subtype,
-              institutionId: authResponse.item.institution_id,
-              userId: token.userId,
-            }
-          })
-          .then(account=>createdAccounts.push(account))
+  tokenArr.map(token => {
+    client.getAuth(token.accessToken, function(error, authResponse) {
+      if (error != null) {
+        var msg = 'Unable to pull accounts from the Plaid API.';
+        console.log(msg + '\n' + error);
+      }
+      const accountsPromiseArr = authResponse.accounts.map(account => {
+        return Account.findOrCreate({
+          where: {
+            id: account.account_id,
+            name: account.name,
+            balanceCurrent: account.balances.current,
+            type: account.type,
+            subtype: account.subtype,
+            institutionId: authResponse.item.institution_id,
+            userId: token.userId,
+          }
         })
-      });
-      res(createdAccounts);
       })
-        // .then(()=>{
-        //   client.getAuth(token.accessToken, function(error, authResponse) {
-        //     if (error != null) {
-        //       var msg = 'Unable to pull accounts from the Plaid API.';
-        //       console.log(msg + '\n' + error);
-        //     }
-        //     console.log('authResponse is ---------------', authResponse);
-        //     authResponse.accounts.map(account=>{
-        //       Account.findOrCreate({
-        //         where: {
-        //           id: account.account_id,
-        //           name: account.name,
-        //           balanceCurrent: account.balances.current,
-        //           type: account.type,
-        //           subtype: account.subtype,
-        //           institutionId: authResponse.item.institution_id,
-        //           userId: token.userId,
-        //         }
-        //       })
-        //     })
-        //   });
-        // })
-          .then(()=>{
-            client.getTransactions(token.accessToken, startDate, endDate, {
-              count: 5,
-              offset: 0,
-            }, function(error, transactionsResponse) {
-              if (error != null) {
-                console.log(JSON.stringify(error));
-              }
-              transactionsResponse.transactions.map(transaction=>{
-                    Transaction.findOrCreate({
-                      where: {
-                        accountId: transaction.account_id,
-                        amount: transaction.amount,
-                        category: transaction.category,
-                        categoryId: transaction.category_id,
-                        date: transaction.date,
-                        name: transaction.name,
-                        userId: token.userId,
-                      }
-                    })
-                .catch(err=>console.log(err))
-              })
-            });
-          })
-          .catch(err=>console.log(err))
+      Promise.all(accountsPromiseArr)
+        .then((arr)=> {
+          client.getTransactions(token.accessToken, startDate, endDate, {
+            count: 5,
+            offset: 0,
+          }, function(error, transactionsResponse) {
+            if (error != null) {
+              console.log(JSON.stringify(error));
+            }
+            transactionsResponse.transactions.map(transaction=>{
+                  Transaction.findOrCreate({
+                    where: {
+                      accountId: transaction.account_id,
+                      amount: transaction.amount,
+                      category: transaction.category,
+                      categoryId: transaction.category_id,
+                      date: transaction.date,
+                      name: transaction.name,
+                      userId: token.userId,
+                    }
+                  })
+              .catch(err=>console.log(err))
+            })
+          });
+        })
 
+    });
   })
-}
+};
 
 linkRouter.post('/', (req, res, next)=>{
   const {user}  = req.body;

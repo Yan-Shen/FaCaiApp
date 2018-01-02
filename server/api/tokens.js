@@ -2,24 +2,38 @@ const router = require('express').Router()
 const {Institution, Token} = require('../db/models');
 const plaid = require('plaid');
 
-
-
-const PLAID_CLIENT_ID = '5a39e7cfefe64e7803074b58';
-const PLAID_SECRET = '33148810212bdb98f09993a25f4457';
-const PLAID_PUBLIC_KEY = 'f74fcf55c0b94e51b2e5a3912667b0';
 const PLAID_ENV = 'sandbox';
+const credentials = {
+  PLAID_CLIENT_ID: '5a39e7cfefe64e7803074b58',
+  PLAID_SECRET: '33148810212bdb98f09993a25f4457',
+  PLAID_PUBLIC_KEY: 'f74fcf55c0b94e51b2e5a3912667b0',
+}
+
+// if (PLAID_ENV === 'sandbox') {
+//   credentials = {
+//     PLAID_CLIENT_ID: '5a39e7cfefe64e7803074b58',
+//     PLAID_SECRET: '33148810212bdb98f09993a25f4457',
+//     PLAID_PUBLIC_KEY: 'f74fcf55c0b94e51b2e5a3912667b0',
+//   }
+// } else if (PLAID_ENV === 'development') {
+//   credentials = {
+//     PLAID_CLIENT_ID: '5a39e7cfefe64e7803074b58',
+//     PLAID_SECRET: '33148810212bdb98f09993a25f4457',
+//     PLAID_PUBLIC_KEY: 'f74fcf55c0b94e51b2e5a3912667b0',
+//   }
+// }
 
 // Initialize the Plaid client
 var client = new plaid.Client(
-  PLAID_CLIENT_ID,
-  PLAID_SECRET,
-  PLAID_PUBLIC_KEY,
+  credentials.PLAID_CLIENT_ID,
+  credentials.PLAID_SECRET,
+  credentials.PLAID_PUBLIC_KEY,
   plaid.environments[PLAID_ENV]
 );
 
 router.post('/', function(request, response, next) {
   response.json({
-    PLAID_PUBLIC_KEY: PLAID_PUBLIC_KEY,
+    PLAID_PUBLIC_KEY: credentials.PLAID_PUBLIC_KEY,
     PLAID_ENV: PLAID_ENV,
   })
 });
@@ -27,7 +41,6 @@ router.post('/', function(request, response, next) {
 
 router.post('/get_access_token', function(request, response, next) {
   const {publicToken, user}  = request.body;
-  console.log('PUBLIC_TOKEN, is ---------------------', publicToken)
   let accessToken = null;
   let itemId = null;
   client.exchangePublicToken(publicToken, function(error, tokenResponse) {

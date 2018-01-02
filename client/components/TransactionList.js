@@ -22,42 +22,36 @@ const TransactionList = props => {
           <div className="transactionListInnerContainer">
             { accountNames.map(accountName => {
               return (
-                <div key={accountName}>
-                  {accountName}
-                  {
-                    groups[accountName].map(transaction => {
-                      return (
-                        <div key={transaction.id} className="transactionItem flex-container-row">
-                          <div>
-                          <span>{transaction.name.toLowerCase()}</span>
-                          {transaction.amount}
+                <div key={accountName}
+                className="accountNameWrapper fullWidth flex-container-spaceBtw">
+                  <div className = "accountName" >
+                    {accountName}
+                  </div>
+                  <div className="flex-container-column transactionItemsByAccount">
+                    {
+                      groups[accountName].map(transaction => {
+                        return (
+                          <div key={transaction.id}
+                          className="transactionItem flex-container-row ">
+                            <div>
+                            <span>{transaction.name.toLowerCase()}</span>
+                            <p>{transaction.amount}</p>
+                            </div>
+                            <span className="transactionDate">{transaction.date}</span>
                           </div>
-                          <div>{transaction.date}</div>
-                        </div>
-                      )
-                    })
-                  }
+                        )
+                      })
+                    }
+                  </div>
                 </div>
-
               )
             })
-            //   props.transactions.map(transaction => {
-            //   return (
-            //     <div key={transaction.id} className="transactionItem flex-container-row">
-            //       <div>
-            //       <span>{transaction.name.toLowerCase()}</span>
-            //       {transaction.amount}
-            //       </div>
-            //       <div>{transaction.date}</div>
-            //     </div>
-            //   )
-            // })
-            }
-          </div>
+          }
         </div>
       </div>
-      </ReactCSSTransitionGroup>
-    )
+    </div>
+  </ReactCSSTransitionGroup>
+  )
 }
 
 const mapState = (state, ownProps) => {

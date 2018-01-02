@@ -55,7 +55,6 @@ const mapState = state => {
   }
 }
 const mapSingleBankState = (state, ownProps) => {
-  console.log('ownprops of profit details single bank state is------------------', ownProps)
   return {
     labeledTransactions:
       state.transactions
@@ -63,7 +62,6 @@ const mapSingleBankState = (state, ownProps) => {
         return transaction.account.institutionId === ownProps.currentBank.id
       })
       .filter(transaction => {
-        console.log('transaction is ----------------', transaction)
        return transaction.category !==null
       }),
     nonLabeledTransactions:

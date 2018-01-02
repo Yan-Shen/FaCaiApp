@@ -10,17 +10,23 @@ import _ from 'lodash';
 //               {name: 'Outback', uv: 1400, pv: 680, amt: 1700}];
 const formatCurrency = require('format-currency')
 let opts = { format: '%s%v', symbol: '$' }
+const transactionCategoryToExclude = ['16001000', '21001000', '21006000', '21007000']
 
 class LineBarAreaComposedChart extends Component {
 	render () {
-    const expenseTransactions = this.props.transactions.filter(transaction => transaction.amount > 0);
+    const expenseTransactions = this.props.transactions
+      .filter(transaction => {
+       return (transaction.amount > 0) &&
+       (transactionCategoryToExclude.indexOf(transaction.categoryId ) === -1)
+      });
     const venderGroups = _.groupBy(expenseTransactions, 'name');
     const venderNames = Object.keys(venderGroups)
     const unfilteredData = venderNames.map((venderName) => {
       const amount = venderGroups[venderName].reduce((accumulator, currentElement)=>{
         return accumulator + currentElement.amount;
       }, 0);
-      const name = venderName.slice(0, venderName.indexOf(' '));
+      const name = venderName;
+      // const name = venderName.slice(0, venderName.indexOf(' '));
       return {
         name: name,
         amount: amount,
@@ -65,7 +71,7 @@ class LineBarAreaComposedChart extends Component {
                 <div className="eachVendoerLabel" key={entry.name}>
                   <span className="className">{entry.name}</span>
                   <span className="classAmount">{formatCurrency(entry.amount).slice(0, -3)}</span>
-                  <span className="classPerc">{percent}%</span>
+                  <span className="classPerc greyBox">{percent}%</span>
                 </div>
               )
             })

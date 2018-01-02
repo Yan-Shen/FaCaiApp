@@ -24,6 +24,10 @@ class BankList extends Component {
       .then(res=> this.props.loadAccounts())
       .then(res=> this.props.loadTransactions())
       .then(res=>this.props.history.push(`/${this.props.user.id}`))
+      // .then(()=>{
+      //   console.log('this should be tiggered------------')
+      //   location.reload();
+      // })
   }
 
   render() {

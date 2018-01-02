@@ -50,6 +50,20 @@ form div {
   background-color: #e4dffd;
   /* height: 100vh; */
 }
+
+.greyBox {
+  border-style: solid;
+  border-color: #c0cdca;
+  border-width: 0.5px;
+  border-radius: 4px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 1px;
+  padding-right: 1px;
+  box-sizing: border-box;
+  display: inline-block;
+  text-align: center;
+}
 /*---------------------------- NAV SECTION ----------------------------*/
 #navContainer {
   background-color: #937ff8;
@@ -143,12 +157,15 @@ form div {
   -webkit-transition-property: transform, opacity;
   transition-property: transform, opacity;
 }
-.hvr-float-shadow:hover, .hvr-float-shadow:focus, .hvr-float-shadow:active {
+/*.hvr-float-shadow:active , .hvr-float-shadow:focus */
+.hvr-float-shadow:hover  {
   -webkit-transform: translateY(-5px);
   transform: translateY(-5px);
   /* move the element up by 5px */
 }
-.hvr-float-shadow:hover:before, .hvr-float-shadow:focus:before, .hvr-float-shadow:active:before {
+
+/* .hvr-float-shadow:focus:before, .hvr-float-shadow:active:before */
+.hvr-float-shadow:hover:before  {
   opacity: 1;
   -webkit-transform: translateY(5px);
   transform: translateY(5px);
@@ -611,7 +628,7 @@ font-weight: 600;
   }
 
   .className {
-    font-size: 0.9em;
+    font-size: 0.8em;
     margin-left: 3px;
     margin-right: 3px;
     color: gray;
@@ -656,30 +673,69 @@ font-weight: 600;
   margin-bottom: 10px;
 }
 
-/*---------------------------- INSTITUION HOME SECTION ----------------------------*/
+/*---------------------------- TRANSACTION LIST SECTION ----------------------------*/
 .transactionListSection {
   width: 100%;
   position: fixed;
   top: 530px;
   justify-content: space-around;
 }
-
+/*border-color: #e6ebea;*/
 .transactionListContainer {
   width: 75%;
   box-sizing: border-box;
-  background-color:#f2f0fe;
-  border-style: solid;
-  border-color: #e6ebea;
-  border-width: 0.2px;
+  border-color: #f2f0fe;
+  border-style: double;
   justify-content: space-around;
 }
 
 .transactionListInnerContainer{
   margin-top: 10px;
-  width: 80%;
+  width: 95%;
+}
+.transactionItemsByAccount{
+  align-items: flex-start;
+  flex: 0 0 75%;
+
 }
 
 .transactionItem{
-  height: 30px;
+  width: 100%;
+  height: 35px;
   justify-content: space-between;
+  border-bottom-style: solid;
+  border-bottom-color: #e6ebea;
+  border-bottom-width: 0.3px;
+}
+
+.transactionItem span {
+  /* font-size: 1.0em; */
+  color: grey;
+}
+
+.transactionItemsByAccount p {
+  display: inline-block;
+  color:  #5d3ff4;
+  margin-left: 10px;
+  font-size: 0.85em;
+}
+.accountNameWrapper {
+  display: flex;
+
+}
+
+.accountName {
+  display: inline-block;
+  height: 35px;
+  flex: 0 0 25%;
+  border-bottom-style: solid;
+  border-bottom-color: #e6ebea;
+  border-bottom-width: 0.3px;
+  color: grey;
+  padding-top: 5px;
+  box-sizing: border-box;
+}
+
+.transactionDate{
+  font-size: 0.8em;
 }
