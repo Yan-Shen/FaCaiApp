@@ -21,13 +21,18 @@ class BankList extends Component {
 
   handleOnClick(){
     axios.post('/api/link', {user: this.props.user})
-      .then(res=> this.props.loadAccounts())
-      .then(res=> this.props.loadTransactions())
-      .then(res=>this.props.history.push(`/${this.props.user.id}`))
-      // .then(()=>{
-      //   console.log('this should be tiggered------------')
-      //   location.reload();
-      // })
+      .then(res => this.props.loadAccounts())
+      .then(res => this.props.loadTransactions())
+      .then(res => {
+        this.props.history.push(`/${this.props.user.id}`)
+      })
+      .then(()=>{
+        const load = () => {
+          location.reload();
+          console.log('timeout is called!!!!!!!!!!!!!!!!!!!!!!!!')
+        }
+        setTimeout(load, 2000);
+      })
   }
 
   render() {
