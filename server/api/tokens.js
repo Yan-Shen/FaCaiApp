@@ -3,25 +3,17 @@ const {Institution, Token} = require('../db/models');
 const plaid = require('plaid');
 
 const PLAID_ENV = 'sandbox';
-const credentials = {
-  PLAID_CLIENT_ID: '5a39e7cfefe64e7803074b58',
-  PLAID_SECRET: '33148810212bdb98f09993a25f4457',
-  PLAID_PUBLIC_KEY: 'f74fcf55c0b94e51b2e5a3912667b0',
-}
 
-// if (PLAID_ENV === 'sandbox') {
-//   credentials = {
-//     PLAID_CLIENT_ID: '5a39e7cfefe64e7803074b58',
-//     PLAID_SECRET: '33148810212bdb98f09993a25f4457',
-//     PLAID_PUBLIC_KEY: 'f74fcf55c0b94e51b2e5a3912667b0',
-//   }
-// } else if (PLAID_ENV === 'development') {
-//   credentials = {
-//     PLAID_CLIENT_ID: '5a39e7cfefe64e7803074b58',
-//     PLAID_SECRET: '33148810212bdb98f09993a25f4457',
-//     PLAID_PUBLIC_KEY: 'f74fcf55c0b94e51b2e5a3912667b0',
-//   }
-// }
+let credentials;
+if (!process.env.PLAID_CLIENT_ID || !process.env.PLAID_SECRET || !process.env.PLAID_PUBLIC_KEY) {
+  console.log('Plaid client ID / secret not found. Cannot create retrieve token.')
+} else {
+  credentials = {
+    PLAID_CLIENT_ID: process.env.PLAID_CLIENT_ID,
+    PLAID_SECRET: process.env.PLAID_SECRET,
+    PLAID_PUBLIC_KEY: process.env.PLAID_PUBLIC_KEY,
+  }
+}
 
 // Initialize the Plaid client
 var client = new plaid.Client(

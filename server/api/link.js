@@ -6,19 +6,24 @@ const {Account, Transaction, User, Token} = require('../db/models');
 var startDate = moment().subtract(30, 'days').format('YYYY-MM-DD');
 var endDate = moment().format('YYYY-MM-DD');
 
-
-const PLAID_CLIENT_ID='5a39e7cfefe64e7803074b58';
-const PLAID_SECRET='33148810212bdb98f09993a25f4457';
-const PLAID_PUBLIC_KEY='f74fcf55c0b94e51b2e5a3912667b0';
-const PLAID_ENV='sandbox';
-
+const PLAID_ENV = 'sandbox';
+let credentials;
+if (!process.env.PLAID_CLIENT_ID || !process.env.PLAID_SECRET || !process.env.PLAID_PUBLIC_KEY) {
+  console.log('Plaid client ID / secret not found. Cannot establish link.')
+} else {
+  credentials = {
+    PLAID_CLIENT_ID: process.env.PLAID_CLIENT_ID,
+    PLAID_SECRET: process.env.PLAID_SECRET,
+    PLAID_PUBLIC_KEY: process.env.PLAID_PUBLIC_KEY,
+  }
+}
 
 const loadData = tokenArr => {
 
   const client = new plaid.Client(
-    PLAID_CLIENT_ID,
-    PLAID_SECRET,
-    PLAID_PUBLIC_KEY,
+    credentials.PLAID_CLIENT_ID,
+    credentials.PLAID_SECRET,
+    credentials.PLAID_PUBLIC_KEY,
     plaid.environments[PLAID_ENV]
   );
 
