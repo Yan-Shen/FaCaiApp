@@ -36,10 +36,10 @@ const AuthForm = (props) => {
           </div>
         </div>
         <div id="googleBtnContainer" >
-        <button id="googleBtn" href="/auth/google" className="flex-container-row">
+        <a id="googleBtn" href="/auth/google" className="flex-container-row">
           <img src='../style/google.png'/>
           <span>{displayName} with Google Account </span>
-        </button>
+        </a>
         </div>
       </div>
     </div>
