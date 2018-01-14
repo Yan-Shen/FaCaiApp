@@ -67,15 +67,19 @@ form div {
 
 /*---------------------------- NAV SECTION ----------------------------*/
 #navContainer {
-  background-color: #937ff8;
+  background-color: black;
+  background: rgba(0, 0, 0, .6);
   padding-right: 120px;
   padding-left: 120px;
-  color: white;
   height: 60px;
   box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  z-index: 2;
 }
 
 #navContainer h1{
+  color: white;
   font-weight: 400;
   font-size: 1.7em;
   letter-spacing: 2px;
@@ -87,8 +91,8 @@ form div {
 }
 
 #navContainer a{
-  color: white;
-  font-size: 1.1em;
+  color: #b2b2b2;
+  font-size: 0.9em;
   letter-spacing: 1px;
 }
 
@@ -369,17 +373,18 @@ form div {
     background-color: white;
     /* height: calc(100vh - 60px); */
     position: relative;
+    margin-top: 60px;
   }
 
-  #edge{
+  /* #edge{
     background: #bcaffb;
     width: 100%;
     height: 20px;
-  }
+  } */
 
     #dashboardContainer{
     width: 100%;
-    height: 630px;
+    /* height: 630px; */
     justify-content: space-between;
   }
 
@@ -422,8 +427,8 @@ form div {
 /*---------------------------- BANK HEADER SECTION ----------------------------*/
   #bankNavContainer{
     width: 100%;
-    height: 80px;
-    background-color: white;
+    height: 70px;
+    background-color: #f7f7f7;
     justify-content: space-around;
     padding-right: 8%;
     box-sizing: border-box;
@@ -480,7 +485,7 @@ form div {
 /*---------------------------- SUMMARY ROW SECTION ----------------------------*/
   .rowSec {
     flex: 0 0 20%;
-    height: 100px;
+    height: 95px;
     margin-top: 5px;
   }
 
@@ -522,7 +527,7 @@ form div {
  }
 
 .setPadding {
-padding-top:40px;
+padding-top:35px;
 padding-bottom:35px;
 box-sizing: border-box;
 }
@@ -568,6 +573,7 @@ font-weight: 600;
     flex: 50%;
     display: flex;
     flex-direction: column;
+    height: 250px;
   }
 
   .chartTitleArea{
@@ -648,7 +654,8 @@ font-weight: 600;
   }
 /*---------------------------- EXPENSE CHART SECTION ----------------------------*/
 #detailRowContainer, #detailExpontainer{
-  flex: 0 0 25%;
+  /* flex: 0 0 25%; */
+  height: 200px;
 }
 
 .recharts-xAxis .recharts-yAxis {
@@ -658,6 +665,7 @@ font-weight: 600;
 .expenseChartContainer{
   padding-top: 20px;
   padding-bottom: 20px;
+  height: 250px;
 }
 .barChartContainer {
   flex: 0 0 40%;
@@ -666,7 +674,7 @@ font-weight: 600;
 
 .vendorLabelContainer {
   flex: 0 0 40%;
-  margin-left: 30px;
+  margin-left: 10px;
   height: 90%;
 }
 
@@ -677,8 +685,9 @@ font-weight: 600;
 /*---------------------------- TRANSACTION LIST SECTION ----------------------------*/
 .transactionListSection {
   width: 100%;
-  position: fixed;
-  top: 530px;
+  /* position: fixed; */
+  /* top: 530px; */
+  margin-top: 25px;
   justify-content: space-around;
 }
 /*border-color: #e6ebea;*/
@@ -739,4 +748,45 @@ font-weight: 600;
 
 .transactionDate{
   font-size: 0.8em;
+}
+
+/*----------------------------  FRONT PAGE SECTION ----------------------------*/
+.frontPageContainer{
+  width: 100%
+
+}
+
+.carosole{
+  width: 100%;
+  height: 500px;
+  background-image: url('http://www.arabianbusiness.com/sites/default/files/images/2017/01/17/digital-finance-1.jpg');
+  background-size: 100% 100%;
+}
+
+.frontPageContainer h1 {
+  color: black
+}
+
+.sologanSection{
+  padding-left: 70px;
+  padding-right: 70px;
+  padding-top: 50px;
+}
+
+.slogonContainer{
+  flex: 0 0 33.33%;
+  justify-content: center;
+  padding-left: 30px;
+  padding-right: 30px;
+  box-sizing: border-box;
+}
+
+.slogonContainer h3, .slogonContainer p{
+  text-align: center;
+  font-size: 0.9em;
+}
+
+.slogonContainer p{
+  padding-left: 60px;
+  padding-right: 60px;
 }

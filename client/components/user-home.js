@@ -31,7 +31,6 @@ class UserHome extends Component {
           banks={this.props.banks}
           setInstitution={this.props.setInstitution}
           userId={userId}/>
-          <div id="edge"/>
 
           <div id="dashboardContainer" className="flex-container-row">
             <div id="balance" className="flex-container-column halfSec">

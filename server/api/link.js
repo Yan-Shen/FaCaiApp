@@ -28,6 +28,7 @@ const loadData = tokenArr => {
         var msg = 'Unable to pull accounts from the Plaid API.';
         console.log(msg + '\n' + error);
       }
+      console.log('authResponse is--------------', authResponse)
       const accountsPromiseArr = authResponse.accounts.map(account => {
         return Account.findOrCreate({
           where: {
@@ -44,7 +45,7 @@ const loadData = tokenArr => {
       Promise.all(accountsPromiseArr)
         .then((arr)=> {
           client.getTransactions(token.accessToken, startDate, endDate, {
-            count: 5,
+            count: 50,
             offset: 0,
           }, function(error, transactionsResponse) {
             if (error != null) {

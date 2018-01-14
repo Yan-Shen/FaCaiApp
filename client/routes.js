@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {Route, Switch, Router} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
-import {Nav, Login, Signup, BankList, Accounts, UserHome, InstitutionHome} from './components'
+import {Nav, Login, Signup, BankList, Accounts, UserHome, InstitutionHome, FrontPage} from './components'
 import {me} from './store'
 /**
  * COMPONENT
@@ -26,6 +26,7 @@ class Routes extends Component {
                 <Route exact path ="/accounts" component = {Accounts} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/signup" component={Signup} />
+                <Route exact path='/' component={FrontPage} />
                 {
                   isLoggedIn &&
                     <Switch>
@@ -35,10 +36,11 @@ class Routes extends Component {
                       {/* <Route exact path={`/${this.props.userId}/${this.props.currentBank.id}`} component={InstitutionHome} /> */}
                        <Route exact path={`/:userId/:institutionId`} component={InstitutionHome} />
                       {/* <Route exact path={`/${this.props.userId}`} component={UserHome} /> */}
+
                     </Switch>
                 }
                 {/* Displays our Login component as a fallback */}
-                {/* <Route component={Login} /> */}
+
               </Switch>
           </div>
         </Router>

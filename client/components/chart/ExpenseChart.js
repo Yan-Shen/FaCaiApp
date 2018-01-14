@@ -2,12 +2,7 @@ import React, {PropTypes, Component} from 'react';
 import {ComposedChart, Line, Area, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from 'recharts';
 import {connect} from 'react-redux';
 import _ from 'lodash';
-// const data = [{name: 'Amazon', uv: 590, pv: 800, amt: 1400},
-//               {name: 'GEICO', uv: 868, pv: 967, amt: 1506},
-//               {name: 'WalMart', uv: 1397, pv: 1098, amt: 989},
-//               {name: 'Fresh', uv: 1480, pv: 1200, amt: 1228},
-//               {name: 'Apple', uv: 1520, pv: 1108, amt: 1100},
-//               {name: 'Outback', uv: 1400, pv: 680, amt: 1700}];
+
 const formatCurrency = require('format-currency')
 let opts = { format: '%s%v', symbol: '$' }
 const transactionCategoryToExclude = ['16001000', '21001000', '21006000', '21007000']
@@ -50,8 +45,8 @@ class LineBarAreaComposedChart extends Component {
   	return (
       <div className="flex-container-row expenseChartContainer">
         <div className='barChartContainer'>
-          <ComposedChart width={300} height={220} data={data}
-              margin={{top: 20, right: 20, bottom: 20, left: 20}}>
+          <ComposedChart width={280} height={220} data={data}
+              margin={{top: 20, right: 20, bottom: 20, left: 10}}>
             <XAxis dataKey="rank" style={axisLable} />
             <YAxis style={axisLable} />
             <Tooltip/>

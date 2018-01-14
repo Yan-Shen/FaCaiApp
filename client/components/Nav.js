@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {withRouter, Link} from 'react-router-dom'
+import {withRouter, Link, NavLink} from 'react-router-dom'
 import {logout} from '../store'
 
 
@@ -17,7 +17,7 @@ const Main = (props) => {
     <div id="navContainer"className="flex-container-row flex-container-spaceBtw fullWidth">
       <div className="flex-container-row">
         {/* <img src="../style/logo.png" /> */}
-        <h1>LINKapp</h1>
+        <Link exact to="/"><h1>LINKapp</h1></Link>
       </div>
       <nav>
 
@@ -28,13 +28,14 @@ const Main = (props) => {
               {
                 (!props.location.pathname.includes('links')&&
                 <Link className="hvr-underline-reveal"
-                to={`/links/${props.user.id}`}>link</Link>)}
+                to={`/links/${props.user.id}`}>LINK</Link>)}
               {
-                props.location.pathname.includes('links') &&
-                <Link to={`/${props.user.id}`} className="hvr-underline-reveal" >home</Link>
+                // props.location.pathname.includes('links') &&
+                <Link to={`/${props.user.id}`} className="hvr-underline-reveal" >HOME</Link>
               }
+                <Link to={`/transaction`} className="hvr-underline-reveal" >TRANSACTION</Link>
               <a className="hvr-underline-reveal"
-              href="#" onClick={handleClick}>logout</a>
+              href="#" onClick={handleClick}>LOGOUT</a>
             </div>
             : <div>
               {/* The navbar will show these links before you log in */}

@@ -27,7 +27,7 @@ class BankList extends Component {
         const load = () => {
           this.props.history.push(`/${this.props.user.id}`)
         }
-        setTimeout(load, 2000);
+        setTimeout(load, 3000);
         // this.props.history.push(`/${this.props.user.id}`)
       })
       // .then(()=>{
