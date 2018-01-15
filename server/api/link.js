@@ -50,7 +50,7 @@ const loadData = tokenArr => {
       Promise.all(accountsPromiseArr)
         .then((arr)=> {
           client.getTransactions(token.accessToken, startDate, endDate, {
-            count: 50,
+            count: 100,
             offset: 0,
           }, function(error, transactionsResponse) {
             if (error != null) {

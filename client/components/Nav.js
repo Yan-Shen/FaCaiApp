@@ -31,7 +31,7 @@ const Main = (props) => {
                 to={`/links/${props.user.id}`}>LINK</Link>)}
               {
                 // props.location.pathname.includes('links') &&
-                <Link to={`/${props.user.id}`} className="hvr-underline-reveal" >HOME</Link>
+                <Link to={`/${props.user.id}`} className="hvr-underline-reveal" >OVERVIEW</Link>
               }
                 <Link to={`/transaction`} className="hvr-underline-reveal" >TRANSACTION</Link>
               <a className="hvr-underline-reveal"
@@ -40,8 +40,8 @@ const Main = (props) => {
             : <div>
               {/* The navbar will show these links before you log in */}
 
-              <Link className="hvr-underline-reveal"  to="/login">login</Link>
-              <Link className="hvr-underline-reveal"  to="/signup">signup</Link>
+              <Link className="hvr-underline-reveal"  to="/login">LOGIN</Link>
+              <Link className="hvr-underline-reveal"  to="/signup">SIGNUP</Link>
             </div>
         }
       </nav>

@@ -11,7 +11,7 @@ import {getAccountsThunk, getBanksThunk, getTransactionsThunk} from '../store'
 class BankList extends Component {
   constructor(props) {
     super(props);
-    this.state = {  }
+    this.state = { loaderView: {visibility: 'hidden'} }
     this.handleOnClick = this.handleOnClick.bind(this);
   }
 
@@ -28,14 +28,8 @@ class BankList extends Component {
           this.props.history.push(`/${this.props.user.id}`)
         }
         setTimeout(load, 3000);
-        // this.props.history.push(`/${this.props.user.id}`)
       })
-      // .then(()=>{
-      //   const load = () => {
-      //     location.reload();
-      //   }
-      //   setTimeout(load, 2000);
-      // })
+    this.setState({loaderView: {visibility: 'visible'}})
   }
 
   render() {
@@ -63,6 +57,7 @@ class BankList extends Component {
           <div className="goBtnWrapper">
             <button id="goBtn" className="hvr-float-shadow"
             onClick={this.handleOnClick}>Go</button>
+            <div style = {this.state.loaderView} className="loader">Loading...</div>
           </div>
       </div>
      )
