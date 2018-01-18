@@ -7,6 +7,8 @@ const session = require('express-session')
 const passport = require('passport')
 const SequelizeStore = require('connect-session-sequelize')(session.Store)
 const db = require('./db')
+const {User, Token} = require('./db/models');
+const {loadData} = require('./api/link')
 const sessionStore = new SequelizeStore({db})
 const PORT = process.env.PORT || 8000
 const app = express()
@@ -97,6 +99,24 @@ const createApp = () => {
   app.use('*', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'public/index.html'))
   })
+
+  // run loadData(update) for all users
+  // Do not delete
+  // to schdule midnight run
+
+  // User.findAll()
+  // .then(users => {
+  //   return users.map(user => {
+  //     Token.findAll({
+  //       where: {
+  //         userId: user.id
+  //       }
+  //     })
+  //     .then(tokens => {
+  //       return loadData(tokens);
+  //     })
+  //   })
+  // })
 
   // error handling endware
   app.use((err, req, res, next) => {

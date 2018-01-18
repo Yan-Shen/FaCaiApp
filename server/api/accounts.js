@@ -5,7 +5,8 @@ module.exports = router
 router.get('/:userId', (req, res, next) => {
   Account.findAll({
       where: {
-        userId: +req.params.userId
+        userId: +req.params.userId,
+        current: true
       },
      include: [{model: Institution}]
   })

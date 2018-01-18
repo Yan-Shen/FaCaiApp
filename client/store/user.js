@@ -24,8 +24,20 @@ const removeUser = () => ({type: REMOVE_USER})
 export const me = () =>
   dispatch =>
     axios.get('/auth/me')
-      .then(res =>
-        dispatch(getUser(res.data || defaultUser)))
+      .then(res =>{
+          dispatch(getUser(res.data || defaultUser))
+          return res.data})
+      // .then((user)=>{
+      //   axios.post('/api/link', {user})
+      //   .then(res => this.props.loadAccounts())
+      //   .then(res => this.props.loadTransactions())
+        // .then(res => {
+        //   const load = () => {
+        //     this.props.history.push(`/${this.props.user.id}`)
+        //   }
+        //   setTimeout(load, 3000);
+        // })
+      // })
       .catch(err => console.log(err))
 
 export const auth = (email, password, method) =>

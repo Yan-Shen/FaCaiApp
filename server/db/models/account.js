@@ -21,6 +21,10 @@ const Account = db.define('account', {
   subtype: {
     type: Sequelize.STRING
   },
+  current: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
+  }
 })
 
 module.exports = Account;

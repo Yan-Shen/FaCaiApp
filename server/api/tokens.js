@@ -45,6 +45,7 @@ router.post('/get_access_token', function(request, response, next) {
     }
         accessToken = tokenResponse.access_token;
         itemId = tokenResponse.item_id;
+        console.log('accessToken is-------------', accessToken)
         client.getItem(accessToken, function(error, itemResponse) {
           if (error != null) {
             console.log(JSON.stringify(error));
@@ -68,7 +69,17 @@ router.post('/get_access_token', function(request, response, next) {
                   }
                 })
                   .then(() => {
-                    Token.findOrCreate({
+                    return Token.destroy({
+                      where: {
+                        userId: user.id,
+                        institutionId: itemResponse.item.institution_id
+                      }
+                    })
+                  })
+                  .then(() => {
+                    console.log('accessToken here is-----------', accessToken)
+                    console.log('itemId here is-----------', itemId)
+                    return Token.findOrCreate({
                       where: {
                         accessToken,
                         itemId,
@@ -76,7 +87,7 @@ router.post('/get_access_token', function(request, response, next) {
                         institutionId: itemResponse.item.institution_id
                       }
                     })
-                    .spread((createdToken, createBool)=>{
+                    .spread((createdToken, bool)=>{
                       const id = instRes.institution.institution_id;
                       const name = instRes.institution.name;
                       response.json({id, name});
