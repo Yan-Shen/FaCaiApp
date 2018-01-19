@@ -65,6 +65,9 @@ form div {
   text-align: center;
 }
 
+.fontWhite {
+  color: white
+}
 /*---------------------------- NAV SECTION ----------------------------*/
 #navContainer {
   background-color: black;
@@ -184,8 +187,8 @@ form div {
   /* height: calc(100vh - 210px); */
   justify-content: space-around;
   background-color: white;
-  margin-top: 80px;
-  margin-bottom: 80px;
+  margin-top: 200px;
+  margin-bottom: 200px;
   padding-top: 80px;
   box-sizing: border-box;
 }
@@ -273,9 +276,9 @@ form div {
   }
 
   #googleBtn span {
-    font-size: 1.5em;
+    font-size: 1em;
     letter-spacing: 1px;
-    font-weight: 600;
+    font-weight: 300;
     color: white;
   }
 
@@ -285,6 +288,7 @@ form div {
     padding-right: 5px;
     padding-left: 10px;
   }
+
 
   /*---------------------------- BANKLIST SECTION ----------------------------*/
 
@@ -470,7 +474,7 @@ form div {
   }
 
   #balance{
-    padding-left: 11%;
+    padding-left: 10%;
   }
 
   .sectionLabel{
@@ -491,7 +495,7 @@ form div {
   }
 
   #exp{
-    padding-right: 11%;
+    padding-right: 10%;
   }
 
 
@@ -753,7 +757,57 @@ font-weight: 600;
   margin-bottom: 10px;
 }
 
+.vendorTransactionsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  right:0;
+  top: 800px;
+  background-color: black;
+  width: 250px;
+  padding-right: 3%;
+  padding-left: 3%;
+  box-sizing: border-box;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  opacity: 0.6;
+  transition: all 1s ease-in;
+}
+
+.vendorTransactionsContainer.vendorActive {
+  top: 130px;
+}
+
+.vendorTransactions{
+  padding-top: 10px;
+}
+
+.vendorTransactions span{
+  padding-top: 10px;
+  color: grey;
+  font-weight: 300;
+  box-sizing: border-box;
+}
+
+.vendorName{
+  color: grey;
+  margin-bottom: 10px;
+}
+
+.removeVendor{
+  color: grey;
+  padding-bottom: 15px;
+  padding-left: 10px;
+  border: none;
+}
 /*---------------------------- TRANSACTION LIST SECTION ----------------------------*/
+
+.transctionListWrap {
+  padding-top: 100px;
+  background-color: white;
+}
+
 .transactionListSection {
   width: 100%;
   /* position: fixed; */
@@ -821,6 +875,17 @@ font-weight: 600;
   font-size: 0.8em;
 }
 
+.searchContainer{
+  text-align: end;
+  display: inline-block;
+  margin-bottom: 10px;
+  padding-top: 10px;
+}
+
+.searchContainer i{
+  font-size: 2em;;
+  color: grey;
+}
 /*----------------------------  FRONT PAGE SECTION ----------------------------*/
 .frontPageContainer{
   width: 100%

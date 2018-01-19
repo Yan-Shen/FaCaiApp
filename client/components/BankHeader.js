@@ -25,7 +25,7 @@ export class BankHeader extends Component {
               this.props.banks && this.props.banks.map(bank => {
               return (
                 <NavLink
-                to={`/${this.props.userId}/${bank.id}`}
+                to={`/institution/${this.props.userId}/${bank.id}`}
                 className="hvr-underline-reveal"
                 activeClassName="active"
                 key={bank.id}>

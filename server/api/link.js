@@ -72,10 +72,12 @@ const loadData = tokenArr => {
             if (error != null) {
               console.log(JSON.stringify(error));
             }
+
           const transactionPromiseArr = transactionsResponse.transactions.map( transaction =>{
                 return Transaction.destroy({
                   where: {
                     userId: token.userId,
+                    accountId: null
                   }
                 })
                 .then(()=>{

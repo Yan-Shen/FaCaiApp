@@ -1,25 +1,40 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {connect} from 'react-redux';
 const _ = require('lodash');
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import {getTransactionsThunk} from '../store'
+import {withRouter} from 'react-router-dom'
 
 const formatCurrency = require('format-currency')
 let opts = { format: '%s%v', symbol: '$' }
 
-const TransactionList = props => {
-  const groups = _.groupBy(props.transactions, 'account.name')
-  const accountNames = Object.keys(groups)
-  console.log('groups are-----------', groups)
+class TransactionList extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      searchMode: false,
+      inputValue: ''
+    }
+  }
+  componentDidMount(){
+    this.props.loadTransactions();
+  }
+
+  render(){
+    const groups = _.groupBy(this.props.transactions, 'account.name')
+    const accountNames = Object.keys(groups)
     return (
       <ReactCSSTransitionGroup
       transitionName="pieContainer"
       transitionAppear={true}
       transitionAppearTimeout={500}
       transitionEnterTimeout={500}
-      transitionLeaveTimeout={300}>
+      transitionLeaveTimeout={300}
+      className="fullWidth transctionListWrap">
       <div className="transactionListSection flex-container-row">
         <div className="transactionListContainer flex-container-row" >
           <div className="transactionListInnerContainer">
+
             { accountNames.map(accountName => {
               return (
                 <div key={accountName}
@@ -52,6 +67,8 @@ const TransactionList = props => {
     </div>
   </ReactCSSTransitionGroup>
   )
+  }
+
 }
 
 const mapState = (state, ownProps) => {
@@ -60,6 +77,24 @@ const mapState = (state, ownProps) => {
    }
 }
 
-export default connect(mapState)(TransactionList);
+const mapStateAll = (state) => {
+  return {
+    transactions: state.transactions
+   }
+}
+
+const mapDispatch = (dispatch, ownProps) => {
+  console.log('ownProps is---------', ownProps)
+  const userId = +ownProps.match.params.userId;
+  console.log('userId is---------', userId)
+  return {
+    loadTransactions(){
+      dispatch(getTransactionsThunk(userId))
+    },
+  }
+}
+
+export const InstitutionTransactions = withRouter(connect(mapState, mapDispatch)(TransactionList));
+export const AllTransactions = withRouter(connect(mapStateAll, mapDispatch)(TransactionList))
 
 

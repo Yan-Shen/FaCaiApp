@@ -4,12 +4,11 @@ import {connect} from 'react-redux';
 
 
 import {getAccountsThunk, getBanksThunk, getTransactionsThunk, getCurrentBank} from '../store'
-
 import {SingleBankBalanceRow, SingleBankProfitRow} from './chart/SummaryRow';
 import {SingleBankBalanceDetails} from './chart/BalanceDetails';
 import {SingleBankProfitDetails} from './chart/ProfitDetails';
 import { BankHeader } from './BankHeader';
-import TransactionList from "./TransactionList";
+import {InstitutionTransactions} from './TransactionList';
 
 
 class InstitutionHome extends Component {
@@ -54,7 +53,7 @@ class InstitutionHome extends Component {
                 <SingleBankProfitDetails currentBank={this.props.currentBank}/>
               </div>
             </div>
-            <TransactionList currentBank={this.props.currentBank} />
+            <InstitutionTransactions currentBank={this.props.currentBank} />
 
         </div>
           }

@@ -13,6 +13,8 @@ import {logout} from '../store'
  */
 const Main = (props) => {
   const {children, handleClick, isLoggedIn} = props
+  const show = props.location.pathname.includes('transactions')
+  let search
   return (
     <div id="navContainer"className="flex-container-row flex-container-spaceBtw fullWidth">
       <div className="flex-container-row">
@@ -33,9 +35,16 @@ const Main = (props) => {
                 // props.location.pathname.includes('links') &&
                 <Link to={`/${props.user.id}`} className="hvr-underline-reveal" >OVERVIEW</Link>
               }
-                <Link to={`/transaction`} className="hvr-underline-reveal" >TRANSACTION</Link>
+                <Link to={`/transactions/${props.user.id}`} className="hvr-underline-reveal" >TRANSACTION</Link>
               <a className="hvr-underline-reveal"
               href="#" onClick={handleClick}>LOGOUT</a>
+              {
+                show &&
+                <div className="searchContainer" onClick={() => { search = true}}>
+                <i className="material-icons">search</i>
+              </div>
+              }
+
             </div>
             : <div>
               {/* The navbar will show these links before you log in */}

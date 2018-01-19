@@ -2,13 +2,36 @@ import React, {PropTypes, Component} from 'react';
 import {ComposedChart, Line, Area, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from 'recharts';
 import {connect} from 'react-redux';
 import _ from 'lodash';
+import {getCurrentVendorThunk} from '../../store';
+import { setTimeout } from 'timers';
 
 const formatCurrency = require('format-currency')
 let opts = { format: '%s%v', symbol: '$' }
 const transactionCategoryToExclude = ['16001000', '21001000', '21006000', '21007000']
 
 class LineBarAreaComposedChart extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {show: false}
+    this.handleClick = this.handleClick.bind(this)
+
+  }
+
+  // componentDidMount () {
+  //   this.setState({show: false})
+  // }
+  handleClick(ele) {
+    this.props.getCurrentVendor(ele.target.innerHTML);
+    this.setState({show: true})
+  }
+
 	render () {
+    let className = 'vendorTransactionsContainer'
+      if (this.state.show) {
+        className += ' vendorActive'
+      }
+
+    console.log('top is----------', top)
     const expenseTransactions = this.props.transactions
       .filter(transaction => {
        return (transaction.amount > 0) &&
@@ -64,7 +87,7 @@ class LineBarAreaComposedChart extends Component {
               const percent = (entry.amount / totalExpense * 100).toFixed(1)
               return (
                 <div className="eachVendoerLabel" key={entry.name}>
-                  <span className="className">{entry.name}</span>
+                  <button className="className" onClick={ele => this.handleClick(ele)}>{entry.name}</button>
                   <span className="classAmount">{formatCurrency(entry.amount).slice(0, -3)}</span>
                   <span className="classPerc greyBox">{percent}%</span>
                 </div>
@@ -73,15 +96,45 @@ class LineBarAreaComposedChart extends Component {
           }
        </div>
 
+       {/* { this.props.venderTransactions[0] && this.state.show && */}
+       <div className={className}>
+        <div className="flex-container-row">
+            <span  className="vendorName">{this.props.currentVendor}</span>
+            <div className="removeVendor" onClick={()=>this.setState({show: false})}>
+              <i className="material-icons">clear</i>
+            </div>
+          </div>
+          {
+            this.props.venderTransactions.map(transaction => {
+            return (
+            <div key={transaction.id} className="flex-container-row flex-container-spaceBtw fullWidth vendorTransactions" >
+              <span> {transaction.date}</span>
+              <span>{formatCurrency(transaction.amount)}</span>
+            </div>)
+          })
+        }
+          </div>
+        {/* } */}
     </div>
     );
   }
 }
 
-const mapState = state => {
+const mapState = (state) => {
+  const name = state.currentVendor
+  console.log('name is----------', name)
   return {
-    transactions: state.transactions
+    transactions: state.transactions,
+    currentVendor: name,
+    venderTransactions: state.transactions.filter(transaction => transaction.name.toLowerCase() === name)
   }
 }
 
-export default connect(mapState)(LineBarAreaComposedChart);
+const mapDispatch = dispatch => {
+  return {
+    getCurrentVendor(vendorName){
+      dispatch(getCurrentVendorThunk(vendorName))
+    }
+  }
+}
+export default connect(mapState, mapDispatch)(LineBarAreaComposedChart);
