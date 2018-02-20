@@ -6,7 +6,7 @@ import axios from 'axios'
 import {connect} from 'react-redux'
 import { withRouter } from 'react-router'
 
-import {getBanksThunk} from '../store'
+import {getBanksThunk} from '../../store'
 
 class PlaidLink extends Component {
   constructor(props) {

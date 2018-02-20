@@ -3,7 +3,8 @@ import {connect} from 'react-redux'
 import {Route, Switch, Router} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
-import {Nav, Login, Signup, BankList, Accounts, UserHome, InstitutionHome, FrontPage} from './components'
+import {Nav, Login, Signup, Accounts, UserHome, InstitutionHome, FrontPage} from './components'
+import BankList from './components/linkAdd/BankList'
 import {AllTransactions} from './components/TransactionList'
 import {me} from './store'
 
@@ -24,7 +25,6 @@ class Routes extends Component {
           <div id="mainSection" className="flex-container-column fullWidth">
               <Nav />
               <Switch>
-                {/* Routes placed here are available to all visitors */}
                 <Route exact path ="/accounts" component = {Accounts} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/signup" component={Signup} />

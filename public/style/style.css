@@ -42,6 +42,10 @@ form div {
   justify-content: space-between
 }
 
+.flex-container-spaceArd {
+  justify-content: space-around
+}
+
 .fullWidth {
   width: 100%
 }
@@ -293,7 +297,7 @@ form div {
   /*---------------------------- BANKLIST SECTION ----------------------------*/
 
   #bankListContainer {
-    min-width: 25%;
+    min-width: 400px;
     background-color: #2b0cc2;
     display: inline-block;
     min-height: 540px;
@@ -306,8 +310,6 @@ form div {
     border-radius: 8px;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     height: 536px;
-    margin-left: auto;
-    margin-right: auto;
     margin-top: 100px;
     margin-bottom: 80px;
     -webkit-transition: 1.5s;
@@ -763,7 +765,7 @@ font-weight: 600;
   align-items: center;
   position: fixed;
   right:0;
-  top: 800px;
+  top: 850px;
   background-color: black;
   width: 250px;
   padding-right: 3%;
@@ -920,6 +922,11 @@ font-weight: 600;
 .slogonContainer h3, .slogonContainer p{
   text-align: center;
   font-size: 0.9em;
+  color: #666;
+}
+
+.stepContainer{
+  height: 50px
 }
 
 .slogonContainer p{

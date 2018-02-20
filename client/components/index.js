@@ -7,7 +7,6 @@
  */
 export {default as Nav} from './Nav'
 export {default as Accounts} from './Accounts'
-export {default as BankList} from './BankList'
 export {default as UserHome} from './user-home'
 export {default as FrontPage} from './FrontPage'
 export {Login, Signup} from './auth-form'

@@ -6,7 +6,8 @@ import PropTypes from 'prop-types'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import PlaidLink from './PlaidLink';
-import {getAccountsThunk, getBanksThunk, getTransactionsThunk} from '../store'
+import Note from './note'
+import {getAccountsThunk, getBanksThunk, getTransactionsThunk} from '../../store'
 
 class BankList extends Component {
   constructor(props) {
@@ -34,31 +35,34 @@ class BankList extends Component {
 
   render() {
     return (
-      <div id="bankListContainer">
-          <PlaidLink />
-          <div id="bankList" >
-            <ReactCSSTransitionGroup
-            transitionName="bankList"
-            transitionAppear={true}
-            transitionAppearTimeout={500}
-            transitionEnterTimeout={500}
-            transitionLeaveTimeout={300}>
-            {
-                this.props.banks &&  this.props.banks.map(bank=>{
-                  return (
-                      <div key={bank.name}>
-                        <span >{bank.name.toLowerCase()}</span>
-                      </div>
-                  )
-                })
-              }
-            </ReactCSSTransitionGroup>
-          </div>
-          <div className="goBtnWrapper">
-            <button id="goBtn" className="hvr-float-shadow"
-            onClick={this.handleOnClick}>Go</button>
-            <div style = {this.state.loaderView} className="loader">Loading...</div>
-          </div>
+      <div className="flex-container-row flex-container-spaceArd" style={{width: '70%'}}>
+        <Note />
+        <div id="bankListContainer">
+            <PlaidLink />
+            <div id="bankList" >
+              <ReactCSSTransitionGroup
+              transitionName="bankList"
+              transitionAppear={true}
+              transitionAppearTimeout={500}
+              transitionEnterTimeout={500}
+              transitionLeaveTimeout={300}>
+              {
+                  this.props.banks &&  this.props.banks.map(bank=>{
+                    return (
+                        <div key={bank.name}>
+                          <span >{bank.name.toLowerCase()}</span>
+                        </div>
+                    )
+                  })
+                }
+              </ReactCSSTransitionGroup>
+            </div>
+            <div className="goBtnWrapper">
+              <button id="goBtn" className="hvr-float-shadow"
+              onClick={this.handleOnClick}>Go</button>
+              <div style = {this.state.loaderView} className="loader">Loading...</div>
+            </div>
+        </div>
       </div>
      )
   }
