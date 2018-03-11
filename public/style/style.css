@@ -230,12 +230,13 @@ form div {
 }
 
 #loginContainer>div{
-  margin-left: 90px;
-  margin-right: 90px;
+  margin-left: auto;
+  margin-right: auto;
   justify-content: space-around;
 }
+
 #loginForm {
-  width: 35%;
+  width: 100%;
 }
 
 #loginForm div {
@@ -244,7 +245,7 @@ form div {
 
 #loginForm input {
   box-sizing: border-box;
-  width: 90%;
+  width: 100%;
   height: 40px;
   font-size: 1.2em;
   background-color: #e1dedf;
@@ -272,8 +273,8 @@ form div {
 }
 
 #orContainer {
-  width: 20%;
-  height: 300px;
+  width: 100%;
+  /* height: 300px; */
   padding-top: 108px;
   box-sizing: border-box;
 }
@@ -282,7 +283,7 @@ form div {
   line-height: 0;
   border-bottom: 1px dotted #999;
   text-align: center;
-  width: 180px;
+  width: 100%;
 }
 
 .back-line > span {
@@ -296,8 +297,8 @@ form div {
     height: 300px;
     padding-top: 87px;
     box-sizing: border-box;
-    margin-left: 20px;
-    width: 32%;
+    /* margin-left: 20px; */
+    width: 100%;
   }
 
   #googleBtn {

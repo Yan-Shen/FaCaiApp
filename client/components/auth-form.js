@@ -11,7 +11,7 @@ const AuthForm = (props) => {
 
   return (
     <div id="loginContainer" className=".flex-container-row">
-      <div className="flex-container-row">
+      <div className="flex-container-wrap">
 
         <form id="loginForm" className="flex-container-column" onSubmit={handleSubmit} name={name}>
           <div>
