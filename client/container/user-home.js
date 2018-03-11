@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
 import {getAccountsThunk, getBanksThunk, getTransactionsThunk, getCurrentBank} from '../store'
-import {BalanceRow, ProfitRow} from './chart/SummaryRow';
-import {BalanceDetails} from './chart/BalanceDetails';
-import {ProfitDetails} from './chart/ProfitDetails';
-import BalanceChart from './chart/BalanceChart';
-import LineBarAreaComposedChart from './chart/ExpenseChart'
-import { BankHeader } from './BankHeader';
+import {BalanceRow, ProfitRow} from '../components/chart/SummaryRow';
+import {BalanceDetails} from '../components/chart/BalanceDetails';
+import {ProfitDetails} from '../components/chart/ProfitDetails';
+import BalanceChart from '../components/chart/BalanceChart';
+import LineBarAreaComposedChart from '../components/chart/ExpenseChart'
+import { BankHeader } from '../components/BankHeader';
 
 class UserHome extends Component {
   constructor(props) {
@@ -25,7 +25,6 @@ class UserHome extends Component {
   render() {
     const userId = this.props.match.path.slice(1);
     return (
-
         <div id="homeContainer" className="flex-container-column">
           <BankHeader
           banks={this.props.banks}

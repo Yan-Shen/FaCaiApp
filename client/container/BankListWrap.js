@@ -3,13 +3,12 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import axios from 'axios';
 import PropTypes from 'prop-types'
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
-import PlaidLink from './PlaidLink';
-import Note from './note'
-import {getAccountsThunk, getBanksThunk, getTransactionsThunk} from '../../store'
+import Note from '../components/linkAdd/note'
+import BankList from '../components/BankList'
+import {getAccountsThunk, getBanksThunk, getTransactionsThunk} from '../store'
 
-class BankList extends Component {
+class BankListWrap extends Component {
   constructor(props) {
     super(props);
     this.state = { loaderView: {visibility: 'hidden'} }
@@ -37,32 +36,7 @@ class BankList extends Component {
     return (
       <div className="flex-container-row flex-container-spaceArd" style={{width: '70%'}}>
         <Note />
-        <div id="bankListContainer">
-            <PlaidLink />
-            <div id="bankList" >
-              <ReactCSSTransitionGroup
-              transitionName="bankList"
-              transitionAppear={true}
-              transitionAppearTimeout={500}
-              transitionEnterTimeout={500}
-              transitionLeaveTimeout={300}>
-              {
-                  this.props.banks &&  this.props.banks.map(bank=>{
-                    return (
-                        <div key={bank.name}>
-                          <span >{bank.name.toLowerCase()}</span>
-                        </div>
-                    )
-                  })
-                }
-              </ReactCSSTransitionGroup>
-            </div>
-            <div className="goBtnWrapper">
-              <button id="goBtn" className="hvr-float-shadow"
-              onClick={this.handleOnClick}>Go</button>
-              <div style = {this.state.loaderView} className="loader">Loading...</div>
-            </div>
-        </div>
+        <BankList {...this.props} loaderView={this.state.loaderView}/>
       </div>
      )
   }
@@ -96,5 +70,5 @@ const mapDispatch = (dispatch, ownProps) => {
   }
 }
 
-export default connect(mapState, mapDispatch)(BankList);
+export default connect(mapState, mapDispatch)(BankListWrap);
 

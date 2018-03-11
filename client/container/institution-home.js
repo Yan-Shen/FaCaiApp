@@ -4,11 +4,11 @@ import {connect} from 'react-redux';
 
 
 import {getAccountsThunk, getBanksThunk, getTransactionsThunk, getCurrentBank} from '../store'
-import {SingleBankBalanceRow, SingleBankProfitRow} from './chart/SummaryRow';
-import {SingleBankBalanceDetails} from './chart/BalanceDetails';
-import {SingleBankProfitDetails} from './chart/ProfitDetails';
-import { BankHeader } from './BankHeader';
-import {InstitutionTransactions} from './TransactionList';
+import {SingleBankBalanceRow, SingleBankProfitRow} from '../components/chart/SummaryRow';
+import {SingleBankBalanceDetails} from '../components/chart/BalanceDetails';
+import {SingleBankProfitDetails} from '../components/chart/ProfitDetails';
+import { BankHeader } from '../components/BankHeader';
+import {InstitutionTransactions} from '../components/TransactionList';
 
 
 class InstitutionHome extends Component {
@@ -24,7 +24,6 @@ class InstitutionHome extends Component {
   }
 
   render() {
-    // console.log('this.props of instituion home is---------', this.props)
     return (
         <div id="homeContainer" className="flex-container-column">
 
@@ -33,11 +32,6 @@ class InstitutionHome extends Component {
             setInstitution={this.props.setInstitution}
             userId={this.props.userId} />
           <div id="edge" />
-
-          {/* {
-            this.props.currentBank &&
-            <h3>{this.props.currentBank.name}</h3>
-          } */}
 
           {this.props.currentBank &&
             <div className="fullWidth">
@@ -65,7 +59,6 @@ class InstitutionHome extends Component {
 
 const mapState = (state, ownProps) => {
   const institutionId = ownProps.match.params.institutionId;
-  // console.log('institutionId is------------', institutionId)
   return {
     currentBank: state.banks.find(bank => bank.id === institutionId),
     banks: state.banks,

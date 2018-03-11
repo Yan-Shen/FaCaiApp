@@ -15,21 +15,17 @@ const AuthForm = (props) => {
 
         <form id="loginForm" className="flex-container-column" onSubmit={handleSubmit} name={name}>
           <div>
-            {/* <label htmlFor="email"><small>Email</small></label> */}
             <input name="email" placeholder="YOUR EMAIL" type="text" />
           </div>
-
           <div>
-            {/* <label htmlFor="password"><small>Password</small></label> */}
             <input name="password" placeholder="YOUR PASSWORD" type="password" />
           </div>
-
           <div>
             <button type="submit">{displayName}</button>
           </div>
-
           {error && error.response && <div> {error.response.data} </div>}
         </form>
+
         <div id="orContainer">
           <div className="back-line">
             <span>OR</span>

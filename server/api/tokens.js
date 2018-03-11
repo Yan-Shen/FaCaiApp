@@ -45,7 +45,6 @@ router.post('/get_access_token', function(request, response, next) {
     }
         accessToken = tokenResponse.access_token;
         itemId = tokenResponse.item_id;
-        console.log('accessToken is-------------', accessToken)
         client.getItem(accessToken, function(error, itemResponse) {
           if (error != null) {
             console.log(JSON.stringify(error));

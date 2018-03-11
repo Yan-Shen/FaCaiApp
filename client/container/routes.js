@@ -2,11 +2,14 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Route, Switch, Router} from 'react-router-dom'
 import PropTypes from 'prop-types'
-import history from './history'
-import {Nav, Login, Signup, Accounts, UserHome, InstitutionHome, FrontPage} from './components'
-import BankList from './components/linkAdd/BankList'
-import {AllTransactions} from './components/TransactionList'
-import {me} from './store'
+import history from '../history'
+import {Login, Signup, Accounts, FrontPage} from '../components'
+import UserHome from './user-home'
+import Nav from './Nav'
+import InstitutionHome from './institution-home'
+import BankListWrap from './BankListWrap'
+import {AllTransactions} from '../components/TransactionList'
+import {me} from '../store'
 
 /**
  * COMPONENT
@@ -33,7 +36,7 @@ class Routes extends Component {
                   isLoggedIn &&
                     <Switch>
                       {/* Routes placed here are only available after logging in */}
-                      <Route exact path={`/links/${this.props.userId}`} component={BankList} />
+                      <Route exact path={`/links/${this.props.userId}`} component={BankListWrap} />
                       <Route exact path={`/${this.props.userId}`} component={UserHome} />
                        <Route exact path={`/institution/:userId/:institutionId`} component={InstitutionHome} />
                       <Route exact path={`/transactions/:userId`} component={AllTransactions} />
@@ -55,8 +58,6 @@ class Routes extends Component {
  */
 const mapState = (state) => {
   return {
-    // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
-    // Otherwise, state.user will be an empty object, and state.user.id will be falsey
     isLoggedIn: !!state.user.id,
     userId: state.user.id,
     currentBank: state.currentBank,

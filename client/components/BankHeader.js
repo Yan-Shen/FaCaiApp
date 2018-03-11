@@ -29,9 +29,7 @@ export class BankHeader extends Component {
                 className="hvr-underline-reveal"
                 activeClassName="active"
                 key={bank.id}>
-                  {/* <div className="hvr-underline-reveal" > */}
                     <span className="bankBtn" onClick={(evt) => this.props.setInstitution(bank)}>{bank.name}</span>
-                  {/* </div> */}
                 </NavLink>
               )
 

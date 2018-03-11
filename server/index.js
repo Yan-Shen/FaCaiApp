@@ -59,7 +59,7 @@ const createApp = () => {
 
   // create a scheduled job to pull update accounts and transations for all users
   // need real user data to test this function (to see whether new accounts and transactions are posted)
-
+  // Do not Delete
   // User.findAll()
   //   .then(users => {
   //     return users.map(user => {
@@ -76,7 +76,6 @@ const createApp = () => {
   //   .then(() => console.log('loaded accounts and transactions data for all users'))
 
   // auth and api routes
-
   app.use('/auth', require('./auth'))
   app.use('/api', require('./api'))
 
@@ -104,20 +103,6 @@ const createApp = () => {
   // Do not delete
   // to schdule midnight run
 
-  // User.findAll()
-  // .then(users => {
-  //   return users.map(user => {
-  //     Token.findAll({
-  //       where: {
-  //         userId: user.id
-  //       }
-  //     })
-  //     .then(tokens => {
-  //       return loadData(tokens);
-  //     })
-  //   })
-  // })
-
   // error handling endware
   app.use((err, req, res, next) => {
     console.error(err)
@@ -129,11 +114,13 @@ const createApp = () => {
 const startListening = () => {
   // start listening (and create a 'server' object representing our server)
   const server = app.listen(PORT, () => console.log(`Mixing it up on port ${PORT}`))
-  // set up our socket control center
+  // initialize a new instance of socket.io by passing the server object.
   const io = socketio(server)
+  // set up socket.io event listener and emitter
   require('./socket')(io)
 }
 
+// Sync all models that aren't already in the database
 const syncDb = () => db.sync()
 
 // This evaluates as true when this file is run directly from the command line,
