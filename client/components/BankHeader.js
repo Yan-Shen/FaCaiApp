@@ -12,7 +12,7 @@ export class BankHeader extends Component {
 
   render() {
     return (
-      <div id="bankNavContainer" className="flex-container-row">
+      <div id="bankNavContainer" className="flex-container-wrap">
             <NavLink
             exact to={`/${this.props.userId}`}
             className="hvr-underline-reveal"

@@ -31,27 +31,26 @@ class UserHome extends Component {
           setInstitution={this.props.setInstitution}
           userId={userId}/>
 
-          <div id="dashboardContainer" className="flex-container-row">
+          <div id="dashboardContainer" className="flex-container-wrap">
             <div id="balance" className="flex-container-column halfSec">
               <span className="sectionLabel">Balance</span>
               <BalanceRow />
               <BalanceDetails />
               {/* <div className="chartContainer">Chart</div> */}
-              <div className="chartWrap">
+            </div>
+            <div id="balanceChart" className="chartWrap">
                 <div className="chartTitleArea">Asset Class (%)</div>
                 <BalanceChart />
               </div>
-            </div>
             <div id="exp" className="flex-container-column halfSec">
               <span className="sectionLabel">Income/Expense</span>
               <ProfitRow />
               <ProfitDetails />
-              <div className="chartWrap">
+            </div>
+            <div id= "expChart" className="chartWrap">
                 <div className="chartTitleArea">Expenses by Vendor ($)</div>
                   <LineBarAreaComposedChart />
               </div>
-
-            </div>
 
           </div>
 

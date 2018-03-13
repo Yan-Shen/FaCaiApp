@@ -486,7 +486,7 @@ form div {
 
   /*---------------------------- HOME SECTION ----------------------------*/
   #homeContainer {
-    width: 100%;
+    width: 90%;
     background-color: white;
     /* height: calc(100vh - 60px); */
     position: relative;
@@ -505,10 +505,10 @@ form div {
     justify-content: space-between;
   }
 
-  #dashboardContainer>div{
-    flex: 0 0 50%;
+  /* #dashboardContainer>div{
+    width: 100%;
 
-  }
+  } */
 
   .halfSec {
     height: 100%;
@@ -516,9 +516,17 @@ form div {
   }
 
   #balance{
-    padding-left: 10%;
+    width: 100%;
+    /* padding-left: 10%; */
+    order: 1;
   }
 
+  #balanceChart{
+    width: 92%;
+    order: 3;
+    margin-left: auto;
+    margin-right: auto;
+  }
   .sectionLabel{
     flex: 0 0 3%;
     margin-top: 20px;
@@ -527,24 +535,35 @@ form div {
     font-size: 1.1em;
   }
 
-  #balance>div, #exp>div {
+  #balance>div, #exp>div,  #balanceChart, #expChart {
     border-style: solid;
     border-color: #e6ebea;
     border-width: 0.3px;
     width: 92%;
+    height: 100%;
     box-sizing:border-box;
     margin-top: 10px;
   }
 
   #exp{
-    padding-right: 10%;
+    width: 100%;
+    /* padding-right: 10%; */
+    order: 2;
   }
 
+  #expChart {
+    width: 92%;
+    order: 4;
+    margin-left: auto;
+    margin-right: auto;
+  }
 
 /*---------------------------- BANK HEADER SECTION ----------------------------*/
   #bankNavContainer{
     width: 100%;
-    height: 70px;
+    /* height: 70px; */
+    min-height: 70px;
+    align-items: center;
     background-color: #f7f7f7;
     justify-content: space-around;
     padding-right: 8%;
@@ -556,6 +575,10 @@ form div {
     color: grey;
   }
 
+  #bankNavContainer a {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
   /* Underline Reveal */
 .hvr-underline-reveal {
   display: inline-block;
@@ -687,10 +710,10 @@ font-weight: 600;
 }
 /*---------------------------- BALANCE CHART SECTION ----------------------------*/
   .chartWrap {
-    flex: 50%;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    height: 250px;
+    /* height: 250px; */
   }
 
   .chartTitleArea{
@@ -704,12 +727,15 @@ font-weight: 600;
   }
 
   .chartContainer {
-    flex: 0 0 80%;
+    /* flex: 0 0 80%; */
+    padding-top: 20px;
+    padding-bottom: 20px;
     width: 100%;
     box-sizing: border-box;
     display: flex;
+    flex-flow: row wrap;
     align-items: center;
-    padding-left: 20px;
+    justify-content: center;
   }
 
   .pieContainer {
@@ -782,17 +808,21 @@ font-weight: 600;
 .expenseChartContainer{
   padding-top: 20px;
   padding-bottom: 20px;
-  height: 250px;
+  /* height: 250px; */
+  justify-content: center;
+  display: flex;
 }
+
 .barChartContainer {
   flex: 0 0 40%;
   height: 90%;
 }
 
 .vendorLabelContainer {
-  flex: 0 0 40%;
-  margin-left: 10px;
-  height: 90%;
+  /* flex: 0 0 40%; */
+  width: 100%;
+  margin-left: 20px;
+  /* height: 90%; */
 }
 
 .eachVendoerLabel{
@@ -1029,5 +1059,24 @@ font-weight: 600;
   }
   #loginContainer{
     width: 80%
+  }
+  #balance, #exp{
+    width: 50%;
+  }
+  #balanceChart{
+    width: 46%
+  }
+  #expChart {
+    width: 46%
+  }
+}
+
+
+@media screen and (min-width: 1100px) {
+  .vendorLabelContainer {
+    width: 45%;
+  }
+  .barChartContainer{
+    width: 50%;
   }
 }

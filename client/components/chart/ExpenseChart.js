@@ -66,7 +66,7 @@ class LineBarAreaComposedChart extends Component {
       fontSize: '0.8em'
     }
   	return (
-      <div className="flex-container-row expenseChartContainer">
+      <div className="flex-container-wrap expenseChartContainer">
         <div className='barChartContainer'>
           <ComposedChart width={280} height={220} data={data}
               margin={{top: 20, right: 20, bottom: 20, left: 10}}>
