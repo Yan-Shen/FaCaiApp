@@ -335,13 +335,21 @@ form div {
 
 
   /*---------------------------- BANKLIST SECTION ----------------------------*/
+  .noteListContainer{
+    margin-top: 100px;
+  }
+
+  .noteContainer {
+    width: 100%;
+    margin-bottom: 30px;
+  }
 
   #bankListContainer {
-    min-width: 400px;
+    min-width: 300px;
+    width: 100%;
     background-color: #2b0cc2;
     display: inline-block;
-    min-height: 540px;
-    margin-top: 60px;
+    min-height: 450px;
     padding-top: 30px;
     padding-left: 50px;
     padding-right: 50px;
@@ -349,8 +357,6 @@ form div {
 
     border-radius: 8px;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-    height: 536px;
-    margin-top: 100px;
     margin-bottom: 80px;
     -webkit-transition: 1.5s;
     -moz-transition: 1.5s;
@@ -1045,6 +1051,11 @@ font-weight: 600;
     padding-top: 0;
     width: 20%;
   }
+  .noteListContainer{
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 @media screen and (min-width: 900px) {
@@ -1069,6 +1080,15 @@ font-weight: 600;
   #expChart {
     width: 46%
   }
+  .noteListContainer{
+    width: 100%;
+  }
+  .noteContainer{
+    width: 40%
+  }
+  #bankListContainer{
+    width: 40%
+  }
 }
 
 
@@ -1078,5 +1098,11 @@ font-weight: 600;
   }
   .barChartContainer{
     width: 50%;
+  }
+  .noteContainer{
+    width: 400px
+  }
+  #bankListContainer{
+    width: 400px
   }
 }

@@ -34,7 +34,7 @@ class BankListWrap extends Component {
 
   render() {
     return (
-      <div className="flex-container-row flex-container-spaceArd" style={{width: '70%'}}>
+      <div className="flex-container-wrap flex-container-spaceArd noteListContainer">
         <Note />
         <BankList {...this.props} loaderView={this.state.loaderView}/>
       </div>
