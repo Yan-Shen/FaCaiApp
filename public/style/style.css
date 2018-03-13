@@ -895,7 +895,7 @@ font-weight: 600;
 }
 /*border-color: #e6ebea;*/
 .transactionListContainer {
-  width: 75%;
+  width: 100%;
   box-sizing: border-box;
   border-color: #f2f0fe;
   border-style: double;
@@ -908,7 +908,8 @@ font-weight: 600;
 }
 .transactionItemsByAccount{
   align-items: flex-start;
-  flex: 0 0 75%;
+  /* flex: 0 0 75%; */
+  width: 100%;
 
 }
 
@@ -934,19 +935,22 @@ font-weight: 600;
 }
 .accountNameWrapper {
   display: flex;
+  flex-flow: row wrap
 
 }
 
 .accountName {
   display: inline-block;
   height: 35px;
-  flex: 0 0 25%;
+  width: 100%;
+  /* flex: 0 0 25%; */
   border-bottom-style: solid;
   border-bottom-color: #e6ebea;
   border-bottom-width: 0.3px;
   color: grey;
   padding-top: 5px;
   box-sizing: border-box;
+  background-color: #e4dffd;
 }
 
 .transactionDate{
@@ -1029,7 +1033,7 @@ font-weight: 600;
   }
   .navSlide {
     visibility: visible;
-    width: 420px;
+    /* width: 420px; */
     flex-direction: row;
     justify-content: flex-end;
     /* top: 0;
@@ -1055,6 +1059,20 @@ font-weight: 600;
     width: 60%;
     margin-left: auto;
     margin-right: auto;
+  }
+}
+@media screen and (min-width: 400px) {
+  .transactionListContainer {
+    width: 80%;
+  }
+}
+
+@media screen and (min-width: 400px) {
+  .linkappContainer {
+    width: 15%;
+  }
+  .nav{
+    width: 85%;
   }
 }
 
@@ -1089,6 +1107,13 @@ font-weight: 600;
   #bankListContainer{
     width: 40%
   }
+  .accountName{
+    width: 25%;
+    background-color: white
+  }
+  .transactionItemsByAccount{
+    width: 75%
+  }
 }
 
 
@@ -1104,5 +1129,8 @@ font-weight: 600;
   }
   #bankListContainer{
     width: 400px
+  }
+  .transactionListContainer {
+    width: 70%;
   }
 }

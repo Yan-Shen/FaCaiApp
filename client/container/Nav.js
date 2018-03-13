@@ -35,7 +35,7 @@ class Main extends Component {
     let search
     return (
       <div id="navContainer" className="flex-container-row flex-container-spaceBtw fullWidth">
-        <div className="flex-container-row">
+        <div className="flex-container-row linkappContainer">
           <Link exact to="/"><h1>LINKapp</h1></Link>
         </div>
         <nav className="nav">
