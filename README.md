@@ -14,13 +14,13 @@ Set up webpack - check out the sample file in my root directory.
 
 This project currently relies on a secrets.js file that must be located in you project root. The secrets.js must have the following structure:
 
-process.env.GOOGLE_CLIENT_ID = 'CLIENT_ID'
-process.env.GOOGLE_CLIENT_SECRET = 'SECRET'
-process.env.GOOGLE_CALLBACK = 'CALLBACK_URL_FOR_AUTH'
+process.env.GOOGLE_CLIENT_ID = 'CLIENT_ID';
+process.env.GOOGLE_CLIENT_SECRET = 'SECRET';
+process.env.GOOGLE_CALLBACK = 'CALLBACK_URL_FOR_AUTH';
 
-process.env.PLAID_CLIENT_ID = 'CLIENT_ID'
-process.env.PLAID_SECRET = 'SECRET'
-process.env.PLAID_PUBLIC_KEY = 'CALLBACK_URL_FOR_AUTH'
+process.env.PLAID_CLIENT_ID = 'CLIENT_ID';
+process.env.PLAID_SECRET = 'SECRET';
+process.env.PLAID_PUBLIC_KEY = 'CALLBACK_URL_FOR_AUTH';
 
 LINKapp relies on Plaid.com api for data aggregation from financial institutions. The current (default) environment of the app is in sandbox mode.  You can retrieve the sandbox api key from Plaid.com website. In the sandbox mode you can experience the functionality of cross-platform access to various financial institutions for sandbox accounts.
 If you plan to run this app in development or production mode, which will allow you to access user personal accounts, you will need to set up a Plaid development or production account.  After you set up development or production accounts, update the above default credential with the "development" or "production" credential you receive.  Please note monthly fees will be charged to production accounts and development accounts (above certain data usage.)
